@@ -1,0 +1,131 @@
+/* ==========================================================================
+   Home Page Styles - Ejmaa System (1rem = 10px)
+   ========================================================================== */
+
+/* --- التنسيق العام للخلفية --- */
+.bg-light-gray {
+    background-color: #f8fafc;
+    font-family: 'Cairo', sans-serif;
+}
+
+/* --- حاوية تأثير الصورة والصندوق الأزرق --- */
+.hero-image-container {
+    position: relative;
+    display: inline-block;
+    padding: 2rem; /* مساحة لبروز الصندوق المنحرف خلف الصورة */
+}
+
+/* --- الصندوق الأزرق الديكوري المنحرف خلف الصورة --- */
+.blue-decorative-box {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    right: 2.5rem;
+    bottom: 0.5rem;
+    background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+    border-radius: 1.5rem;
+    transform: rotate(-4deg) skewX(-2deg); /* الانحراف والميلان */
+    box-shadow: 0 1.5rem 3.5rem rgba(30, 58, 138, 0.25);
+    z-index: 1;
+    transition: all 0.4s ease-in-out;
+}
+
+/* --- تصميم الصورة الأمامية الفخمة --- */
+.main-hero-img {
+    position: relative;
+    max-height: 44rem; /* تم تحويل 440px إلى 44rem */
+    width: auto;
+    object-fit: cover;
+    border-radius: 1.5rem;
+    border: 0.6rem solid #ffffff; 
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.15);
+    transform: rotate(2deg); /* ميلان عكسي بسيط لإعطاء تباين بصري مذهل */
+    z-index: 2;
+    transition: all 0.4s ease-in-out;
+}
+
+/* --- تأثير تفاعلي عند تمرير الماوس (Hover) --- */
+.hero-image-container:hover .main-hero-img {
+    transform: rotate(0deg) scale(1.03); /* استقامة خفيفة وتكبير بسيط عند التحويم */
+    box-shadow: 0 2.5rem 5rem rgba(0, 0, 0, 0.22);
+}
+
+.hero-image-container:hover .blue-decorative-box {
+    transform: rotate(-6deg) scale(1.02) skewX(-4deg); /* زيادة الانحراف بالخلفية لزيادة عمق الـ 3D */
+    box-shadow: 0 2.5rem 4.5rem rgba(30, 58, 138, 0.35);
+}
+
+/* --- أشرطة البوابات (Portal Strips) في الجانب الأيمن --- */
+.portal-strip {
+    transition: all 0.3s ease;
+    border: 0.1rem solid #e2e8f0;
+}
+
+.portal-strip:hover {
+    transform: translateX(-0.5rem); /* حركة مرنة باتجاه اليمين لتناسب محاذاة النص العربي */
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.05) !important;
+    background-color: #fcfdfd !important;
+}
+
+/* --- دوائر الأيقونات --- */
+.portal-strip-icon {
+    width: 5rem; 
+    height: 5rem;
+    min-width: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+/* --- خلفيات الأيقونات الخفيفة --- */
+.bg-success-light {
+    background-color: #d1fae5;
+}
+
+.bg-primary-light {
+    background-color: #dbeafe;
+}
+
+.bg-dark-light {
+    background-color: #f1f5f9;
+}
+
+.bg-warning-light {
+    background-color: rgba(245, 158, 11, 0.12) !important;
+}
+
+/* --- البوابات المخصصة --- */
+.super-admin-section {
+    position: relative;
+    z-index: 10;
+}
+
+.super-admin-portal {
+    background-color: #fffbeb !important; /* خلفية ذهبية خفيفة جداً ومريحة */
+    border: 0.1rem solid rgba(245, 158, 11, 0.2) !important; /* تعديل الـ 1px إلى 0.1rem */
+    border-start: 0.4rem solid #f59e0b !important; /* الحفاظ على الخط الأصفر العريض على اليمين */
+}
+
+/* --- أحجام الخطوط الإضافية --- */
+.fs-7 {
+    font-size: 0.85rem;
+}
+
+.fs-8 {
+    font-size: 1.1rem !important;
+}
+
+.leading-relaxed {
+    line-height: 1.8;
+}
+
+/* --- تخصيص الأزرار --- */
+.btn-success {
+    background-color: #10B981 !important;
+    border-color: #10B981 !important;
+}
+
+.btn-success:hover {
+    background-color: #059669 !important;
+}

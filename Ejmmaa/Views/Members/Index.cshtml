@@ -1,0 +1,90 @@
+@model IEnumerable<Ejmmaa.Models.ViewModels.ClanMembersViewModel>;
+
+@{
+    ViewData["Title"] = "إدارة العشيرة الداخلية - إجماع";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="~/css/SuperAdmin/dashboard.css" />
+    <link rel="stylesheet" href="~/css/Members/Index.css" />
+}
+
+<div class="dashboard-wrapper-layout">
+    <aside class="sidebar-wrapper">
+        <div class="sidebar-header">
+            <h4 class="text-gold fw-bold">لجنة العشيرة</h4>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Manage", "Admins")" class="nav-item"><i class="bi bi-speedometer2"></i> لوحة
+                التحكم</a>
+                <a href="@Url.Action("Index","Sections")" class="nav-item"><i class="bi bi-diagram-3"></i>الاقسام</a>
+                <a href="@Url.Action("Index","Members")" class="nav-item active"><i class="bi bi-people"></i>الأفراد</a>
+                <a href="@Url.Action("Index","Elections")" class="nav-item"><i class="bi bi-gear"></i> ادارة العملية
+                    الانتخابية</a>
+                    <div class="nav-divider"></div>
+                    <a href="/" class="nav-item text-danger"><i class="bi bi-box-arrow-right"></i> تسجيل الخروج</a>
+                </nav>
+            </aside>
+
+            <main class="main-content-dashboard">
+                <header class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="fw-bold">لوحة إدارة الهيئة العامة</h2>
+                    <a href="@Url.Action("Create","Members")" class="btn btn-gold">
+                        <i class="bi bi-plus-lg"></i> اضافـــة
+                    </a>
+                </header>
+
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="card p-3 shadow-sm">
+                            <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-info-circle"></i> معلومات الافراد</h5>
+                            <table id="ClanInfoTable" class="table ejmaa-table w-100">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>الاسم</th>
+                                        <th>الرقم الوطني</th>
+                                        <th>رقم الهاتف</th>
+                                        <th>الجنس</th>
+                                        <th>تاريخ الميلاد</th>
+                                        <th>القسم</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var member in Model)
+                                    {
+                                        <tr>
+                                            <td>@member.MemberId</td>
+                                            <td>@member.FullName</td>
+                                            <td>@member.NationalId</td>
+                                            <td>@member.PhoneNumber</td>
+                                            <td>@(member.Gender == 'M' ? "ذكر" : "أنثى")</td>
+                                            <td>@member.BirthDate.ToString("yyyy-MM-dd")</td>
+                                            <td>@member.SectionName</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-warning"
+                                                   href="@Url.Action("Edit", "Members", new { memberId = member.MemberId })">تعديل</a>
+                                                <a class="btn btn-sm btn-danger"
+                                                   href="@Url.Action("Delete", "Members", new { memberId = member.MemberId })">حذف</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+
+        </div>
+
+        @section Scripts {
+            <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+            <script src="~/JS/apiService.js"></script>
+            <script src="~/JS/Members/Index.js"></script>
+        }
+

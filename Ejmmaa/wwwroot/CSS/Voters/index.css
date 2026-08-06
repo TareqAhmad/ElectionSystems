@@ -1,0 +1,22 @@
+/* تخصيص بوكس العنوان لصفحة المقترعين */
+.voter-header-box {
+    background: linear-gradient(135deg, #065f46 0%, #059669 100%); /* تدرج لوني أخضر زمردي هادئ ورسمي */
+    border-bottom: 5px solid #34d399; /* خط أخضر مضيء يرمز للموافقة والنجاح */
+}
+
+.voter-header-box i {
+    display: block;
+    color: #34d399; /* جعل الأيقونة ملوّنة بالدرجة المضيئة */
+    filter: drop-shadow(0 4px 8px rgba(52, 211, 153, 0.3));
+}
+
+/* لضمان تناسق حواف الفورم */
+.login-form-wrapper {
+    overflow: hidden;
+}
+
+/* تنسيق خانة رمز التحقق لتظهر بشكل مميز ومحاذاة ممتازة */
+.otp-input {
+    letter-spacing: 0.5rem;
+    font-weight: bold;
+}

@@ -1,0 +1,85 @@
+@model IEnumerable<Ejmmaa.Models.ViewModels.ElectionSupervisorsViewModel>
+
+@{
+    ViewData["Title"] = "إدارة المشرفين   - إجماع";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="~/css/SuperAdmin/dashboard.css" />
+    <link rel="stylesheet" href="~/css/Supervisors/Manage.css" />
+}
+
+<div class="dashboard-wrapper-layout">
+    <aside class="sidebar-wrapper">
+        <div class="sidebar-header"><h4 class="text-gold fw-bold">ادارة العملية الانتخابية</h4></div>
+        <nav class="sidebar-nav">
+            <a href="@Url.Action("Index", "Elections")" class="nav-item"><i class="bi bi-speedometer2"></i> لوحة التحكم</a>
+            <a href="@Url.Action("Index" ,"Candidates")" class="nav-item"><i class="bi bi-gear"></i> المرشيحن</a>
+            <a href="@Url.Action("Show" , "Voters")" class="nav-item"><i class="bi bi-gear"></i> الناخبين</a>
+            <a href="@Url.Action("Manage" , "Supervisors")" class="nav-item active"><i class="bi bi-gear"></i> المشرفين</a>
+            <a href="@Url.Action("Index","Regions")" class="nav-item"><i class="bi bi-people"></i>المناطق</a>
+            <a href="@Url.Action("Index","PollingStations")" class="nav-item"><i class="bi bi-people"></i>مراكز الاقتراع</a>
+            <a href="@Url.Action("Index","BallotBoxes")" class="nav-item"><i class="bi bi-diagram-3"></i>الصنديق</a>
+           <div class="nav-divider"></div>
+           <a href="" class="nav-item text-danger"><i class="bi bi-box-arrow-right"></i>عودة</a>
+        </nav>
+    </aside>
+
+    <main class="main-content-dashboard">
+        <header class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold">لوحة ادارة العملية الانتخابية</h2>
+            <a href="@Url.Action("Create", "Supervisors")" class="btn btn-gold">
+                <i class="bi bi-plus-lg"></i> اضافـــة
+            </a>
+        </header>
+
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="card p-4 shadow-sm border-0">
+                    <div class="table-responsive">
+                        <table id=regionsTable" class="table ejmaa-table w-100 align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>اسم المشرف</th>
+                                    <th>الرقم الوطني</th>
+                                    <th>رقم الهاتف</th>
+                                    <th>الصندوق</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var supervisor in Model)
+                                {
+                                    <tr>
+                                        <td>@supervisor.SupervisorID</td>
+                                        <td>@supervisor.FullName</td>
+                                        <td>@supervisor.NationalId</td>
+                                        <td>@supervisor.PhoneNumber</td>
+                                        <td>@supervisor.BoxNumber</td>
+                                       <td>
+                                        <a class="btn btn-sm btn-warning" href="@Url.Action("Edit", "Supervisors", new { supervisorId = supervisor.SupervisorID })">تعديل</a>
+                                        <a class="btn btn-sm btn-danger" href="@Url.Action("Delete", "Supervisors", new { supervisorId = supervisor.SupervisorID })">حذف</a>
+                                       </td>
+                                    </tr>
+                                  
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/JS/apiService.js"></script>
+    <script src="~/JS/Supervisors/Manage.js"></script>
+}
+
+
+

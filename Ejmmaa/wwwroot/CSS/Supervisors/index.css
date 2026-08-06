@@ -1,0 +1,8 @@
+.login-header-box {
+    background: linear-gradient(135deg, #1E3A8A 0%, #1e40af 100%);
+    border-bottom: 0.5rem solid #fbbf24; /* خط ذهبي 5px للمشرفين */
+}
+.login-header-box i {
+    display: block;
+    filter: drop-shadow(0 0.4rem 0.6rem rgba(0,0,0,0.2));
+}

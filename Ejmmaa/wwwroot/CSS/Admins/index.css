@@ -1,0 +1,9 @@
+.admin-header-box {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); /* داكن وفخم للأدمن */
+    border-bottom: 0.5rem solid #38bdf8; /* خط سماوي مضيء للأدمن */
+}
+.admin-header-box i {
+    display: block;
+    color: #38bdf8;
+    filter: drop-shadow(0 0.4rem 0.8rem rgba(56, 189, 248, 0.3));
+}

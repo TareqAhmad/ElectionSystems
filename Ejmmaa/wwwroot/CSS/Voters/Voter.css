@@ -1,0 +1,118 @@
+body {
+    background-color: #f4f6f9;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1rem; /* 16px */
+}
+
+/* حاوية الرحلة الانتخابية */
+.voter-card {
+    border: none;
+    border-radius: 1rem; /* يعادل 16px */
+    box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.08); /* يعادل 10px 30px */
+    background-color: #ffffff;
+}
+
+/* مظهر الخطوات الملونة في الأعلى */
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 2.5rem; /* يعادل 40px */
+}
+
+.step-indicator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 0.1875rem; /* يعادل 3px */
+    background-color: #e0e0e0;
+    z-index: 1;
+    transform: translateY(-50%);
+}
+
+.step-node {
+    width: 2.8125rem; /* يعادل 45px */
+    height: 2.8125rem; /* يعادل 45px */
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    color: #757575;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.step-node.active {
+    background-color: #1E3A8A;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.3125rem rgba(30, 58, 138, 0.2); /* يعادل 5px */
+}
+
+.step-node.completed {
+    background-color: #10B981;
+    color: #ffffff;
+}
+
+/* كروت المرشحين التفاعلية */
+.candidate-card {
+    border: 0.125rem solid #e2e8f0; /* يعادل 2px */
+    border-radius: 0.75rem; /* يعادل 12px */
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.candidate-card:hover {
+    transform: translateY(-0.3125rem); /* يعادل -5px */
+    border-color: #3B82F6;
+    box-shadow: 0 0.5rem 1.25rem rgba(59, 130, 246, 0.15); /* يعادل 8px 20px */
+}
+
+/* تحديد كرت المرشح المختار */
+.candidate-card.selected {
+    border-color: #10B981;
+    background-color: #f0fdf4;
+}
+
+.candidate-card.selected::before {
+    content: "\f058";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 0.625rem; /* يعادل 10px */
+    left: 0.625rem; /* يعادل 10px */
+    color: #10B981;
+    font-size: 1.5rem; /* يعادل 24px */
+    z-index: 3;
+}
+
+.candidate-img {
+    height: 11.25rem; /* يعادل 180px */
+    object-fit: cover;
+    background-color: #f8fafc;
+}
+
+/* أزرار مخصصة للهوية */
+.btn-ejmaa {
+    background-color: #1E3A8A;
+    color: white;
+    padding: 0.75rem 1.5rem; /* يعادل 12px 24px */
+    border-radius: 0.5rem; /* يعادل 8px */
+    font-weight: bold;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-ejmaa:hover {
+    background-color: #111827;
+    color: white;
+}
+
+.text-ejmaa {
+    color: #1E3A8A;
+}

@@ -1,0 +1,51 @@
+/* ==========================================================================
+   Super Admin Login Style (1rem = 10px)
+   ========================================================================== */
+
+/* تخصيص الخلفية اليسرى الفخمة (تدريج كربوني داكن ومهيب) */
+.super-admin-left-bg {
+    background: linear-gradient(135deg, #090d16 0%, #1e293b 100%) !important;
+}
+
+/* لون الذهب الملكي المضيء */
+.text-gold {
+    color: #fbbf24 !important;
+}
+
+/* تخصيص بوكس العنوان لصفحة السوبر أدمن */
+.super-admin-header-box {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border-bottom: 0.5rem solid #fbbf24; /* خط ذهبي 5px للمطور */
+}
+
+.super-admin-header-box i {
+    display: block;
+    color: #fbbf24;
+    filter: drop-shadow(0 0.4rem 0.8rem rgba(251, 191, 36, 0.4));
+}
+
+/* زر السوبر أدمن الذهبي التفاعلي */
+.btn-gold {
+    background-color: #fbbf24 !important;
+    color: #0f172a !important;
+    border: none !important;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-gold:hover {
+    background-color: #f59e0b !important; /* لون أغمق قليلاً عند التحويم */
+    color: #000000 !important;
+    transform: translateY(-0.2rem);
+    box-shadow: 0 0.8rem 1.5rem rgba(251, 191, 36, 0.25);
+}
+
+/* تخصيص الفوكس على حقول الإدخال لتتناغم مع اللون الذهبي */
+.form-control:focus {
+    border-color: #fbbf24 !important;
+    box-shadow: 0 0 0 0.25rem rgba(251, 191, 36, 0.15) !important;
+}
+
+/* لضمان انسياب زوايا المربع الرئيسي */
+.login-form-wrapper {
+    overflow: hidden;
+}

@@ -1,0 +1,80 @@
+/* ==========================================================================
+   Supervisor Panel Styles (1rem = 10px) - Under Master Layout
+   ========================================================================== */
+
+.supervisor-container {
+    background-color: #f8fafc;
+    min-height: 100vh;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.4rem;
+}
+
+/* هيدر شاشة المشرف */
+.supervisor-header {
+    border-start: 0.4rem solid #3b82f6 !important; /* لون أزرق أساسي للمشرف */
+}
+
+.supervisor-avatar {
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* لون الخلفية للجانب الأيسر الكربوني الجميل */
+.bg-dark-blue {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+}
+
+/* صندوق تفاصيل الناخب بعد البحث */
+.bg-light-blue {
+    background-color: #f0f7ff;
+    border-color: #cbd5e1 !important;
+}
+
+.voter-info-grid p {
+    font-size: 1.5rem;
+    color: #334155;
+}
+
+.voter-info-grid span {
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* الفوكس على مربع البحث ليكون بلون أزرق المشرفين */
+.form-control:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.15) !important;
+}
+
+/* قائمة الناخبين الذين تم التحقق منهم */
+.verified-item {
+    background-color: #ffffff;
+    transition: all 0.2s ease-in-out;
+}
+
+.verified-item:hover {
+    background-color: #f1f5f9;
+}
+
+.bg-success-light {
+    background-color: rgba(34, 197, 94, 0.15);
+}
+
+.bg-secondary-light {
+    background-color: rgba(100, 116, 139, 0.15);
+}
+
+.text-gold {
+    color: #fbbf24 !important;
+}
+
+.fs-8 {
+    font-size: 1.1rem !important;
+}
+
+.fs-9 {
+    font-size: 0.95rem !important;
+}

@@ -1,0 +1,78 @@
+@{
+    ViewData["Title"] = "بوابة مطور النظام - تسجيل الدخول";
+}
+
+@section Styles {  
+    <link rel="stylesheet" href="~/css/SuperAdmin/index.css" />
+}
+
+<div class="container-fluid full-screen-container p-0 vh-100">
+    <div class="row no-gutters h-100 mx-0">
+        
+        <div class="col-md-6 d-none d-md-block login-image-column super-admin-left-bg text-white position-relative">
+            <div class="login-image-container d-flex flex-column align-items-center justify-content-center h-100 p-5">
+                <div class="text-center brand-overlay">
+                    <img src="~/images/logo.jpg" alt="إجماع - نظام إدارة الانتخابات" class="img-fluid mb-4" style="max-height: 38rem; filter: drop-shadow(0rem 1rem 2rem rgba(0,0,0,0.4));">
+                    
+                    <h1 class="display-5 fw-bold mb-3 text-gold">نظام إجماع الإلكتروني</h1>
+                    <p class="fs-3 fw-light text-light-50 mb-4">منصة التحكم الفني، إدارة الاشتراكات، ومراقبة العمليات الانتخابية العليا لمطور النظام.</p>
+                    <span class="fs-4 text-white-50 d-block"> &copy; 2026 Ejmaa Solutions. لوحة المطور الأعلى.</span>
+                </div>
+            </div>
+        </div>            
+
+        <div class="col-md-6 col-12 login-form-column d-flex align-items-center justify-content-center bg-white">
+            <div class="login-form-wrapper border shadow-lg rounded-4 w-100 overflow-hidden" style="max-width: 50rem;">
+                
+                <div class="super-admin-header-box p-4 text-center text-white">
+                    <i class="bi bi-shield-lock-fill fs-1 mb-2"></i>
+                    <h3 class="fw-bold mb-0 text-gold text-uppercase">Super Admin Portal</h3>
+                    <p class="text-white-50 small mb-0">لوحة تحكم وتسيير المنصة الرئيسية</p>
+                </div>
+
+                <div class="p-5">
+                    @* شعار صغير للشاشات الصغيرة (يظهر فقط في الموبايل) *@
+                    <div class="text-center d-md-none mb-4">
+                         <h1 class="fw-bold text-dark">إجماع <span class="text-gold">S.A</span></h1>
+                         <p class="text-muted">بوابة المطور والاشتراكات</p>
+                    </div>
+
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold text-dark">تسجيل دخول المطور</h2>
+                        <p class="text-muted small">يرجى إدخال بيانات الاعتماد الآمنة للولوج إلى النظام</p>
+                    </div>
+
+                    <form id="superAdminLoginForm">
+                        <div class="mb-4">
+                            <label for="superAdminEmail" class="form-label fw-bold small text-dark">البريد الإلكتروني للمطور</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope-at text-muted"></i></span>
+                                <input type="email" class="form-control text-center fs-5 p-3 border-start-0" id="superAdminEmail" placeholder="developer@ejmaa.com" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="superAdminPassword" class="form-label fw-bold small text-dark">كلمة المرور الأمنية</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="bi bi-key-fill text-muted"></i></span>
+                                <input type="password" class="form-control text-center fs-5 p-3 border-start-0" id="superAdminPassword" placeholder="••••••••••••" required>
+                            </div>
+                        </div>
+
+                        <button type="button" id="btnSuperAdminLogin" class="btn btn-gold w-100 fs-5 shadow-sm p-3 fw-bold">
+                           تأكيد الهوية والدخول للمنصة <i class="bi bi-arrow-left ms-2"></i>
+                        </button>
+                    </form>
+
+                    <p class="text-danger mt-3 text-center d-none" id="MsgSuperAdminError">بيانات الدخول غير صحيحة، أو لا تملك الصلاحية المطلوبة.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/JS/apiService.js"></script>
+    <script src="~/JS/SuperAdmin/index.js"></script>
+}

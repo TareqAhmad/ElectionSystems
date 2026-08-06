@@ -1,0 +1,118 @@
+@{
+    ViewData["Title"] = "لوحة التحكم العليا - إجماع";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/SuperAdmin/dashboard.css" />
+}
+
+<div class="dashboard-wrapper-layout">
+    
+    <aside class="sidebar-wrapper">
+        <div class="sidebar-header">
+            <img src="~/images/logo.jpg" alt="Logo" class="sidebar-logo">
+            <h4 class="text-gold fw-bold mb-0">إجماع <span class="fs-8 text-white-50">J.O</span></h4>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active"><i class="bi bi-speedometer2"></i> الرئيسية</a>
+            <a href="#" class="nav-item"><i class="bi bi-people"></i> إدارة العشائر</a>
+            <a href="#" class="nav-item"><i class="bi bi-card-checklist"></i> الاشتراكات</a>
+            <a href="#" class="nav-item"><i class="bi bi-chat-left-dots"></i> مراقبة OTP</a>
+            <a href="#" class="nav-item"><i class="bi bi-wallet2"></i> التقارير المالية</a>
+            <div class="nav-divider"></div>
+            <a href="#" class="nav-item"><i class="bi bi-gear"></i> إعدادات المنصة</a>
+            <a href="/" class="nav-item text-danger"><i class="bi bi-box-arrow-right"></i> تسجيل الخروج</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="d-flex align-items-center">
+                <div class="user-avatar">ط</div>
+                <div class="ms-3 text-end">
+                    <p class="mb-0 text-white fw-bold">طارق المطوّر</p>
+                    <p class="mb-0 text-gold fs-8">مدير النظام الأعلى</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content-dashboard">
+        <header class="content-header d-flex justify-content-between align-items-center">
+            <h2 class="fw-bold text-dark mb-0">نظرة عامة على النظام</h2>
+            <div class="header-actions">
+                <span class="badge bg-light text-dark p-3 border"><i class="bi bi-calendar3 me-2"></i> @DateTime.Now.ToString("dd MMMM, yyyy")</span>
+            </div>
+        </header>
+
+        <div class="row g-4 mt-2">
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon bg-primary-light text-primary"><i class="bi bi-house-door"></i></div>
+                    <div class="stat-info">
+                        <h3 class="fw-bold mb-0">42</h3>
+                        <p class="text-muted mb-0">إجمالي العشائر</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon bg-success-light text-success"><i class="bi bi-check2-circle"></i></div>
+                    <div class="stat-info">
+                        <h3 class="fw-bold mb-0">12</h3>
+                        <p class="text-muted mb-0">انتخابات نشطة</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon bg-warning-light text-warning"><i class="bi bi-chat-quote"></i></div>
+                    <div class="stat-info">
+                        <h3 class="fw-bold mb-0">1,250</h3>
+                        <p class="text-muted mb-0">رسائل OTP مرسلة</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card border-gold">
+                    <div class="stat-icon bg-gold-light text-gold"><i class="bi bi-star-fill"></i></div>
+                    <div class="stat-info">
+                        <h3 class="fw-bold mb-0">8</h3>
+                        <p class="text-muted mb-0">طلبات اشتراك جديدة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card mt-5">
+            <div class="card-header-box d-flex justify-content-between align-items-center">
+                <h4 class="fw-bold mb-0">آخر الاشتراكات والنشاطات</h4>
+                <button class="btn btn-gold btn-sm"><i class="bi bi-plus-lg me-1"></i> إضافة عشيرة جديدة</button>
+            </div>
+            <div class="table-responsive mt-4">
+                <table class="table ejmaa-table align-middle">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>اسم العشيرة / الجمعية</th>
+                            <th>نوع الباقة</th>
+                            <th>السعر</th>
+                            <th>تاريخ البدء</th>
+                            <th>تاريخ الانتهاء</th>
+                            <th>الحالة</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="TenantSubscriptionsBody">
+                        <!-- Data will be populated here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+</div>
+
+@section scripts {
+    <script src="~/JS/apiService.js"></script>
+    <script src="~/JS/SuperAdmin/dashboard.js"></script>
+}

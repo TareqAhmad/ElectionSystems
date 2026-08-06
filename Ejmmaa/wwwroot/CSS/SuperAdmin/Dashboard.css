@@ -1,0 +1,225 @@
+/* ==========================================================================
+   Super Admin Dashboard (1rem = 10px) - Under Master Layout
+   ========================================================================== */
+
+/* الحاوية الرئيسية للوحة التحكم لضمان مرونة التقسيم وتناسق الخطوط */
+.dashboard-wrapper-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f1f5f9;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.4rem;
+}
+
+/* --- القائمة الجانبية الفخمة (Sidebar) --- */
+.sidebar-wrapper {
+    width: 28rem;
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    box-shadow: -0.5rem 0 2rem rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+/* ترويسة القائمة الجانبية (شعار المنصة) */
+.sidebar-header {
+    padding: 3rem 2rem;
+    text-align: center;
+    border-bottom: 0.1rem solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-logo {
+    max-height: 6rem;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+    border: 0.2rem solid #fbbf24;
+}
+
+/* روابط التنقل في السايد بار */
+.sidebar-nav {
+    flex-grow: 1;
+    padding: 2rem 1.5rem;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    color: #cbd5e1;
+    text-decoration: none !important;
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.nav-item i {
+    margin-left: 1.5rem;
+    font-size: 1.8rem;
+}
+
+/* التفاعل عند تحويم الماوس أو تفعيل الرابط النشط */
+.nav-item:hover, .nav-item.active {
+    background-color: rgba(251, 191, 36, 0.1);
+    color: #fbbf24;
+}
+
+.nav-divider {
+    height: 0.1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    margin: 2rem 0;
+}
+
+/* تذييل القائمة الجانبية (صندوق معلومات طارق) */
+.sidebar-footer {
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.user-avatar {
+    width: 4.5rem;
+    height: 4.5rem;
+    background-color: #fbbf24;
+    color: #0f172a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+/* --- المحتوى الرئيسي (Main Content) بجانب السايد بار اليمنى --- */
+.main-content-dashboard {
+    flex-grow: 1;
+    margin-right: 28rem; /* إزاحة تساوي عرض السايد بار اليمنى لمنع التداخل */
+    padding: 4rem;
+    width: calc(100% - 28rem);
+    background-color: #f1f5f9;
+}
+
+.content-header {
+    margin-bottom: 4rem;
+}
+
+/* --- كروت الإحصائيات (Stat Cards) --- */
+.stat-card {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.03);
+    border: 0.1rem solid #e2e8f0;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-0.5rem);
+}
+
+.stat-icon {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin-left: 2rem;
+}
+
+/* خلفيات الأيقونات الخفيفة الملونة للكروت */
+.bg-gold-light { 
+    background-color: rgba(251, 191, 36, 0.1) !important; 
+}
+
+.bg-primary-light {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+}
+
+.bg-success-light {
+    background-color: rgba(16, 185, 129, 0.1) !important;
+}
+
+.bg-warning-light {
+    background-color: rgba(245, 158, 11, 0.1) !important;
+}
+
+.border-gold { 
+    border-color: #fbbf24 !important; 
+}
+
+.text-gold {
+    color: #fbbf24 !important;
+}
+
+/* --- الجداول والبطاقات داخل لوحة التحكم --- */
+.content-card {
+    background: #ffffff;
+    padding: 3rem;
+    border-radius: 2rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.05);
+    border: 0.1rem solid #e2e8f0;
+}
+
+.card-header-box {
+    border-bottom: 0.1rem solid #f1f5f9;
+    padding-bottom: 2rem;
+}
+
+.ejmaa-table thead th {
+    background-color: #f8fafc;
+    padding: 1.5rem;
+    border-bottom: 0.2rem solid #e2e8f0;
+    font-size: 1.3rem;
+    color: #64748b;
+}
+
+.ejmaa-table tbody td {
+    padding: 1.5rem;
+    border-bottom: 0.1rem solid #f1f5f9;
+}
+
+/* نقاط المؤشر التفاعلية للحالة (نشط / منتهي) */
+.status-dot {
+    display: inline-block;
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    margin-left: 0.5rem;
+}
+
+.status-dot.online { 
+    background-color: #22c55e; 
+    box-shadow: 0 0 0.8rem #22c55e; 
+}
+
+.status-dot.offline { 
+    background-color: #ef4444; 
+}
+
+/* زر الذهب الملكي المخصص لتطبيقات السوبر أدمن */
+.btn-gold {
+    background-color: #fbbf24 !important;
+    color: #0f172a !important;
+    font-weight: bold;
+    padding: 0.8rem 2rem;
+    border-radius: 0.8rem;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-gold:hover {
+    background-color: #f59e0b !important;
+    transform: translateY(-0.1rem);
+}
+
+.fs-8 {
+    font-size: 1.1rem !important;
+}

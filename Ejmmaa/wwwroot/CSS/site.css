@@ -1,0 +1,187 @@
+/* ==========================================================================
+   Start Global Rules & Variables
+   ========================================================================== */
+:root {
+    /* تم تحديث اللون الأساسي ليتوافق مع هوية إجماع الأزرق الملكي */
+    --main-color: #1E3A8A; 
+    --bg-color: #30336b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    color: black;
+    list-style-type: none;
+    text-decoration: none !important;
+    text-transform: capitalize;
+    transition: all .4s linear;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%; /* 1rem = 10px */
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Cairo", sans-serif;
+    font-size: 1.4rem; /* ما يعادل 14px */
+    background-color: #f8fafc;
+}
+
+/* ==========================================================================
+   Common Layout & Helper Classes
+   ========================================================================== */
+.vh-50 {
+    min-height: 50vh;
+}
+
+.vh-40 {
+    min-height: 40vh;
+}
+
+.fs-0 {
+    font-size: 1rem;
+}
+
+.w-15 {
+    width: 15% !important;
+}
+
+.none {
+    display: none !important;
+}
+
+/* ==========================================================================
+   Header & Footer
+   ========================================================================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #eb4d4b !important; 
+    height: 4rem;
+    z-index: 1000;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #ffff;
+    background-color: #0984e3;
+    height: 4rem;
+    z-index: 1000;
+}
+
+/* ==========================================================================
+   Background & Custom Styles
+   ========================================================================== */
+.bg-custom {
+    background-color: #192a56 !important; 
+}
+
+.bg-alter {
+    background-color: #c8d6e5 !important;
+}
+
+.custom-select-rtl {
+    direction: rtl !important; 
+    text-align: right !important;
+    appearance: none !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='16' viewBox='0 0 20 20' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M5 7l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: left 1rem center;
+    padding-left: 3.5rem;
+}
+
+/* ==========================================================================
+   SweetAlert2 / Toast Customization
+   ========================================================================== */
+.my-toast-title {
+    font-size: 1.8rem !important;  /* تم تحويلها لـ rem لتتوافق مع نظامك */
+    font-weight: bold !important;  
+    font-family: 'Cairo', sans-serif; 
+    color: #ffffff !important;     
+    margin: 0 1rem !important;     
+}
+
+/* ==========================================================================
+   Ejmaa Identity & Shared Login Styles (المشترك الجديد)
+   ========================================================================== */
+.bg-ejmaa {
+    background-color: var(--main-color) !important;
+}
+
+.text-ejmaa {
+    color: var(--main-color) !important;
+}
+
+/* أزرار النظام الموحدة */
+.btn {
+    font-size: 1.3rem !important; /* الحفاظ على حجم أزرارك الأصلية */
+}
+
+.btn-ejmaa {
+    background-color: var(--main-color) !important;
+    border: none !important;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-ejmaa:hover {
+    background-color: #0f172a !important; /* يتحول للأسود الداكن عند التحويم */
+    transform: translateY(-2px);
+    box-shadow: 0 0.8rem 1.5rem rgba(0, 0, 0, 0.1);
+}
+
+/* هيكل صفحات تسجيل الدخول (Split Screen 50/50) */
+.full-screen-container {
+    height: 100vh;
+    min-height: 100vh;
+}
+
+.login-image-column {
+    background: linear-gradient(135deg, var(--main-color) 0%, #0F172A 100%);
+}
+
+.login-image-container {
+    background-size: cover;
+    background-position: center;
+}
+
+/* حاوية الفورم (Login Form Wrapper) */
+.login-form-wrapper {
+    overflow: hidden; /* لقص زوايا بوكس العنوان مع تدوير الحاوية */
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+/* تحسين مدخلات النصوص والأيقونات المرافقة */
+.input-group-text {
+    border-color: #dee2e6;
+    color: #6c757d;
+}
+
+.form-control {
+    border-color: #dee2e6;
+}
+
+.form-control:focus {
+    border-color: var(--main-color) !important;
+    box-shadow: 0 0 0 0.25rem rgba(30, 58, 138, 0.15) !important;
+}
+
+/* لمنع ظهور هوامش جانبية تالفة في الشاشات */
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}

@@ -1,0 +1,86 @@
+@{
+    ViewData["Title"] = "نظام إجماع - تسجيل دخول الإدارة";
+}
+
+@section Styles {  
+    <link rel="stylesheet" href="~/css/Admins/index.css" />
+}
+
+<div class="container-fluid full-screen-container p-0">
+    <div class="row no-gutters h-100 m-0">
+        
+        <div class="col-md-6 d-none d-md-block login-image-column bg-ejmaa text-white position-relative">
+            <div class="login-image-container d-flex flex-column align-items-center justify-content-center h-100 p-5">
+                <div class="text-center brand-overlay">
+                    <img src="~/images/logo.jpg" alt="إجماع - نظام إدارة الانتخابات" class="img-fluid mb-4" style="max-height: 38rem; filter: drop-shadow(0rem 1rem 2rem rgba(0,0,0,0.3));">
+                    
+                    <h1 class="display-5 fw-bold mb-3">نظام إجماع الإلكتروني</h1>
+                    <p class="fs-3 fw-light text-light mb-4">المنصة الآمنة والموثوقة لإدارة انتخابات العشائر والجمعيات بكل شفافية ونزاهة.</p>
+                    <span class="fs-4 text-white-50 d-block"> &copy; 2026 Ejmaa Solutions. جميع الحقوق محفوظة.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-12 login-form-column d-flex align-items-center justify-content-center bg-white">
+            <div class="login-form-wrapper border shadow-lg rounded-4 w-100 overflow-hidden" style="max-width: 50rem;">
+                
+                <div class="admin-header-box p-4 text-center text-white">
+                    <i class="bi bi-sliders fs-1 mb-2"></i>
+                    <h3 class="fw-bold mb-0">بوابة الإدارة والتحكم العام</h3>
+                    <p class="text-white-50 small mb-0">إدخال العشائر، الأقسام، الأفراد، والصلاحيات</p>
+                </div>
+
+                <div class="p-5">
+                    @* شعار صغير للشاشات الصغيرة (يظهر فقط في الموبايل) *@
+                    <div class="text-center d-md-none mb-4">
+                         <h1 class="fw-bold text-ejmaa">إجماع</h1>
+                         <p class="text-muted">نظام إدارة الانتخابات والشورى</p>
+                    </div>
+
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold text-dark">تسجيل الدخول للإدارة</h2>
+                        <p class="text-muted small">يرجى إدخال بيانات الاعتماد للوصول للصلاحيات الكاملة</p>
+                    </div>
+
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label fw-bold small">اسم المستخدم (الأدمن)</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="bi bi-person text-muted"></i></span>
+                                <input type="text" class="form-control fs-5 p-3 border-start-0" id="username" placeholder="مثال: tareq_admin" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label fw-bold small">كلمة المرور</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="bi bi-key text-muted"></i></span>
+                                <input type="password" class="form-control fs-5 p-3 border-start-0" id="password" placeholder="********" required>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="showPassword">
+                                <label class="form-check-label small" for="showPassword">عرض كلمة المرور</label>
+                            </div>
+                            <a href="#" class="text-decoration-none text-ejmaa small fw-bold">نسيت كلمة المرور؟</a>
+                        </div>
+
+                        <button type="button" id="btnLogin" class="btn btn-ejmaa w-100 fs-5 shadow-sm text-white p-3 fw-bold">
+                           دخول للوحة التحكم <i class="bi bi-box-arrow-in-left ms-2"></i>
+                        </button>
+                    </form>
+
+                    <p class="text-danger mt-3 text-center d-none" id="MsgError">خطأ في اسم المستخدم أو كلمة المرور</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/JS/apiService.js"></script>
+    <script src="~/JS/Admins/index.js"></script>
+}

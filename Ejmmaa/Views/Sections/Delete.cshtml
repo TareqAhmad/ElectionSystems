@@ -1,0 +1,61 @@
+@{
+    ViewData["Title"] = "حذف القسم - إجماع";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/SuperAdmin/dashboard.css" />
+    <link rel="stylesheet" href="~/css/Sections/Delete.css" />
+}
+
+<div class="dashboard-wrapper-layout">
+    <aside class="sidebar-wrapper">
+        <div class="sidebar-header">
+            <h4 class="text-gold fw-bold">لجنة العشيرة</h4>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item"><i class="bi bi-speedometer2"></i> لوحة التحكم</a>
+            <a href="@Url.Action("Index","Sections")" class="nav-item active"><i class="bi bi-diagram-3"></i>الاقسام</a>
+            <a href="@Url.Action("Index","Members")" class="nav-item"><i class="bi bi-people"></i>الأفراد</a>
+            <a href="@Url.Action("Index","Elections")" class="nav-item"><i class="bi bi-gear"></i> ادارة العملية
+                الانتخابية</a>
+                <div class="nav-divider"></div>
+                <a href="/" class="nav-item text-danger"><i class="bi bi-box-arrow-right"></i> تسجيل الخروج</a>
+            </nav>
+        </aside>
+
+        <main class="main-content-dashboard">
+            <header class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="fw-bold">حذف القسم</h2>
+                    <p class="text-muted">استعراض وإدارة العملية الانتخابية</p>
+                </div>
+            </header>
+
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <form id="deleteSectionForm" class="mt-3 border rounded p-4 bg-white shadow-sm">
+                            <div class="row">
+                                <div class="col-md mb-3">
+                                    <label for="SectionName" class="form-label fw-bold">اسم القسم</label>
+                                    <input type="text" class="form-control fs-4" id="SectionName" name="SectionName"
+                                           required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-success fs-4 px-4"><i
+                                    class="fas fa-save me-2"></i>حفظ</button>
+                                    <a href="@Url.Action("Index", "Sections")" class="btn btn-secondary fs-4 px-4">إلغاء</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <main>
+                </div>
+
+                @section Scripts {
+                    <script src="~/JS/apiService.js"></script>
+                    <script src="~/JS/Sections/Delete.js"></script>
+                }

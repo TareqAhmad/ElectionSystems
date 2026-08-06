@@ -1,0 +1,101 @@
+@{
+    ViewData["Title"] = "الرئيسية - نظام إجماع الإلكتروني";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Home/index.css" />
+}
+
+<div class="container-fluid min-vh-100 d-flex align-items-center py-5 bg-light-gray">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            
+            <div class="col-lg-6 order-lg-1 text-center">
+                <div class="hero-image-container">
+                    <div class="blue-decorative-box"></div>
+                    <img src="~/images/logo.jpg" alt="شعار نظام إجماع الإلكتروني" class="img-fluid main-hero-img" />
+                </div>
+            </div>
+
+            <div class="col-lg-6 order-lg-2">
+                <div class="hero-text-content text-end">
+                    <span class="badge bg-primary-light text-primary px-3 py-2 rounded-pill fs-6 mb-3 fw-bold">إصدار 2026 الرقمي</span>
+                    <h1 class="display-4 fw-bold text-dark mb-3">نظام إجماع الإلكتروني</h1>
+                    <p class="text-muted fs-5 leading-relaxed mb-4">
+                        المنصة الرقمية المتكاملة لإدارة وتنظيم العملية الانتخابية للعشائر والهيئات الإدارية. يضمن لك النظام تجربة اقتراع إلكترونية مشفرة، نزيهة، وسرية بالكامل لضمان دقة النتائج وسلاستها.
+                    </p>
+                    
+                    <hr class="my-4 text-muted opacity-25">
+
+                    <h4 class="fw-bold text-dark mb-4 fs-5"><i class="bi bi-door-open-fill text-primary me-2"></i>اختر بوابة الدخول للبدء:</h4>
+                    
+                    <div class="d-flex flex-column gap-3">
+
+                        <div class="portal-strip d-flex align-items-center p-3 rounded-3 bg-white shadow-sm border-start border-warning border-4 super-admin-portal">
+                            <div class="portal-strip-icon bg-warning-light text-warning rounded-circle me-3">
+                                <i class="bi bi-shield-fill-check"></i>
+                            </div>
+                            <div class="flex-grow-1 text-end pe-3">
+                                <span class="badge bg-warning text-dark fs-8 fw-bold mb-1">التحكم الفني والمالي</span>
+                                <h5 class="fw-bold text-dark mb-1 fs-4">إدارة النظام والاشتراكات</h5>
+                                <p class="text-muted mb-0 fs-6 fw-bold">متابعة اشتراكات العشائر، استهلاك رسائل OTP، وتفعيل الحسابات وتحديث الباقات.</p>
+                            </div>
+                            <a href="/SuperAdmin/Index" class="btn btn-warning btn-sm fw-bold px-3">دخول</a>
+                        </div>
+
+                        <div class="portal-strip d-flex align-items-center p-3 rounded-3 bg-white shadow-sm border-start border-dark border-4">
+                            <div class="portal-strip-icon bg-dark-light text-dark rounded-circle me-3">
+                                <i class="bi bi-gear-fill"></i>
+                            </div>
+                            <div class="flex-grow-1 text-end pe-3">
+                                <h5 class="fw-bold text-dark mb-1 fs-4">إدارة العشيرة والجمعية</h5>
+                                <p class="text-muted mb-0 fs-6 fw-bold">إدخال المرشحين، الأقسام، الأفراد، وتعيين من يحق له الاقتراع داخل العشيرة.</p>
+                            </div>
+                            <a href="/Admins/Index" class="btn btn-dark btn-sm fw-bold px-3">دخول</a>
+                        </div>
+
+                        <div class="portal-strip d-flex align-items-center p-3 rounded-3 bg-white shadow-sm border-start border-primary border-4">
+                            <div class="portal-strip-icon bg-primary-light text-primary rounded-circle me-3">
+                                <i class="bi bi-eye-fill"></i>
+                            </div>
+                            <div class="flex-grow-1 text-end pe-3">
+                                <h5 class="fw-bold text-dark mb-1 fs-4">المشرفون ومراقبو الصناديق</h5>
+                                <p class="text-muted mb-0 fs-6 fw-bold">لمراقبة سير الصناديق ومتابعة حضور الناخبين والفرز والنتائج المباشرة.</p>
+                            </div>
+                            <a href="/Supervisors/Index" class="btn btn-primary btn-sm fw-bold px-3">دخول</a>
+                        </div>
+
+                        <div class="portal-strip d-flex align-items-center p-3 rounded-3 bg-white shadow-sm border-start border-success border-4">
+                            <div class="portal-strip-icon bg-success-light text-success rounded-circle me-3">
+                                <i class="bi bi-person-check-fill"></i>
+                            </div>
+                            <div class="flex-grow-1 text-end pe-3">
+                                <h5 class="fw-bold text-dark mb-1 fs-4">نظام المقترعين والناخبين</h5>
+                                <p class="text-muted mb-0 fs-6 fw-bold">للتحقق من اسمك والمشاركة في التصويت السري والآمن لمرشحيك.</p>
+                            </div>
+                            <a href="@Url.Action("Index", "Voters")" class="btn btn-success btn-sm fw-bold px-3">دخول</a>
+                        </div>
+
+                        <div class="portal-strip d-flex align-items-center p-3 rounded-3 bg-white shadow-sm border-start border-danger border-4">
+                            <div class="portal-strip-icon bg-danger  text-success rounded-circle me-3">
+                                <i class="bi bi-person-check-fill"></i>
+                            </div>
+                            <div class="flex-grow-1 text-end pe-3">
+                                <h5 class="fw-bold text-dark mb-1 fs-4">نظام إدارة الحملة الانتخابية</h5>
+                                <p class="text-muted mb-0 fs-6 fw-bold">للتحقق من اسمك والمشاركة في التصويت السري والآمن لمرشحيك.</p>
+                            </div>
+                            <a href="#" id="electionCampaign" class="btn btn-danger btn-sm fw-bold px-3">دخول</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/JS/apiService.js"></script>
+    <script src="~/JS/Home/Index.js"></script>
+}

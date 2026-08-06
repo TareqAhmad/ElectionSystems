@@ -1,0 +1,122 @@
+@{
+    ViewData["Title"] = "بوابة المقترع - نظام إجماع";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Voters/Voter.css" />
+}
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-ejmaa">نظام إجماع الإلكتروني</h1>
+        <p class="text-muted fs-5">بوابتك الآمنة للمشاركة الانتخابية والشورى</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card voter-card p-4 p-md-5">
+                
+                <div class="step-indicator">
+                    <div class="step-node active" id="node1">1</div>
+                    <div class="step-node" id="node2">2</div>
+                    <div class="step-node" id="node3">3</div>
+                    <div class="step-node" id="node4">4</div>
+                </div>
+
+                <hr class="mb-4 text-muted opacity-25">
+
+                <div class="step-content" id="step1">
+                    <div class="text-center mb-4">
+                        <h3 class="fw-bold text-dark">خطوة 1: التحقق من الهوية</h3>
+                        <p class="text-muted">الرجاء إدخال رقمك الوطني للتحقق من أهليتك الانتخابية في كشوفات العشيرة</p>
+                    </div>
+                    <div class="mb-4">
+                        <label for="voterNationalId" class="form-label fw-bold">الرقم الوطني للناخب</label>
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-text bg-light"><i class="fa-solid fa-id-card text-muted"></i></span>
+                            <input type="text" class="form-control" id="voterNationalId" placeholder="مثال: 996XXXXXXXX" maxlength="10" required>
+                        </div>
+                    </div>
+                    <div class="d-grid">
+                        <button type="button" onclick="goToStep(2)" class="btn btn-ejmaa btn-lg shadow-sm">
+                            التحقق من الأهلية والطلب <i class="fa-solid fa-arrow-left ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="step-content d-none" id="step2">
+                    <div class="text-center mb-4">
+                        <h3 class="fw-bold text-dark">خطوة 2: تأكيد الرمز الأمني</h3>
+                        <p class="text-muted">تم إرسال رمز تحقق مؤقت (OTP) إلى رقم هاتفك المسجل لدينا، يرجى إدخاله لتأكيد هويتك</p>
+                    </div>
+                    <div class="mb-4">
+                        <label for="otpCode" class="form-label fw-bold">رمز التحقق المستلم</label>
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-text bg-light"><i class="fa-solid fa-key text-muted"></i></span>
+                            <input type="text" class="form-control text-center fs-3 letter-spacing-5" id="otpCode" placeholder="••••" maxlength="4" required>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3">
+                        <button type="button" onclick="goToStep(1)" class="btn btn-outline-secondary btn-lg w-50">رجوع</button>
+                        <button type="button" onclick="goToStep(3)" class="btn btn-ejmaa btn-lg w-50 shadow-sm">تأكيد الرمز والدخول</button>
+                    </div>
+                </div>
+
+                <div class="step-content d-none" id="step3">
+                    <div class="text-center mb-4">
+                        <h3 class="fw-bold text-dark">خطوة 3: اختيار مرشحك</h3>
+                        <p class="text-muted">الرجاء اختيار مرشح واحد من القائمة أدناه لمنصب (رئيس مجلس العشيرة)</p>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6 col-12">
+                            <div class="card candidate-card text-center p-3" onclick="selectCandidate(1, this)">
+                                <img src="~/images/placeholder-candidate.png" class="card-img-top candidate-img rounded-3 mb-3" alt="المرشح الأول">
+                                <h5 class="fw-bold mb-1">المهندس أحمد صالح العبد الله</h5>
+                                <span class="text-muted fs-7">برنامج: التطوير والتمكين المستدام</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="card candidate-card text-center p-3" onclick="selectCandidate(2, this)">
+                                <img src="~/images/placeholder-candidate.png" class="card-img-top candidate-img rounded-3 mb-3" alt="المرشح الثاني">
+                                <h5 class="fw-bold mb-1">الدكتور محمد حسن سلامة</h5>
+                                <span class="text-muted fs-7">برنامج: شورى وتكامل مجتمعي</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-3">
+                        <button type="button" onclick="goToStep(2)" class="btn btn-outline-secondary btn-lg w-50">رجوع</button>
+                        <button type="button" onclick="goToStep(4)" class="btn btn-success btn-lg w-50 shadow-sm">تأكيد واختيار الصوت</button>
+                    </div>
+                </div>
+
+                <div class="step-content d-none" id="step4">
+                    <div class="text-center py-4">
+                        <div class="mb-4">
+                            <i class="fa-solid fa-circle-check text-success" style="font-size: 80px;"></i>
+                        </div>
+                        <h2 class="fw-bold text-dark mb-3">تم تسجيل صوتك بنجاح!</h2>
+                        <p class="text-muted fs-5 mb-4">شكراً لمشاركتك الفعالة والأمينة في رسم القرار.</p>
+                        
+                        <div class="bg-light p-3 rounded-3 border mb-4 d-inline-block">
+                            <span class="text-muted d-block fs-7">الرقم المرجعي السري للصوت (لا تطلع عليه أحداً)</span>
+                            <strong class="text-dark fs-4" id="referenceCode">EJ-2026-X99</strong>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="button" onclick="resetVoterJourney()" class="btn btn-ejmaa btn-lg">الخروج والعودة للرئيسية</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+    <script src="~/JS/Voting.js"></script>
+     
+}
