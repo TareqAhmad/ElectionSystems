@@ -27,10 +27,15 @@ namespace Ejmmaa.Services.Implementations
 
             string query = @"SELECT BoxId, BoxNumber, StationName,Status
                              FROM Ballot_Boxes B
-                             LEFT JOIN Polling_Stations P ON B.StationId = P.StationId"; 
+                             LEFT JOIN Polling_Stations P ON B.StationId = P.StationId
+                              AND B.IsShow = @IsShow"; 
+ 
+             var sqlParameters  = new []
+             {
+                  new SqlParameter("@IsShow", 1)
+             }; 
 
-
-             DataTable dt = _dbHelper.Select(query); 
+             DataTable dt = _dbHelper.Select(query,sqlParameters); 
 
             if (dt != null && dt.Rows.Count > 0)
             {  
@@ -54,12 +59,40 @@ namespace Ejmmaa.Services.Implementations
 
         }
     
-      public BallotBoxesViewModel GetBallotBox()
+      public BallotBoxesViewModel GetBallotBoxById(BallotBoxesDto ballotBoxesDto)
         {
-            var x  = new  BallotBoxesViewModel(); 
+            if (ballotBoxesDto == null) return null;
 
-            return x; 
+            string query = @"SELECT BoxId, BoxNumber, StationId, Status
+                             FROM Ballot_Boxes
+                             WHERE BoxId = @BoxId
+                             AND IsShow = @IsShow";
+
+            var parameters = new[]
+            {
+                new SqlParameter("@BoxId", ballotBoxesDto.BoxId),
+                 new SqlParameter("@IsShow", 1)
+            };
+
+            DataTable dt = _dbHelper.Select(query, parameters);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                var ballotBox = new BallotBoxesViewModel
+                {
+                    BoxId = Convert.ToInt32(row["BoxId"]),
+                    BoxNumber = row["BoxNumber"].ToString(),
+                    StationId = Convert.ToInt32(row["StationId"]),
+                    Status = Convert.ToBoolean(row["Status"])
+                };
+
+                return ballotBox;
+            }
+
+            return null;
         }
+
 
       public bool AddBallotBox(BallotBoxesDto ballotBoxesDto)
       {
@@ -89,7 +122,8 @@ namespace Ejmmaa.Services.Implementations
                               SET BoxNumber = @BoxNumber,
                                   StationId = @StationId,
                                   Status = @Status
-                              WHERE BoxId = @BoxId";
+                              WHERE BoxId = @BoxId
+                              AND IsShow = @IsShow";
          
             var parameters = new[]
             {
@@ -97,6 +131,7 @@ namespace Ejmmaa.Services.Implementations
                 new SqlParameter("@BoxNumber", ballotBoxesDto.BoxNumber),
                 new SqlParameter("@StationId", ballotBoxesDto.StationId),
                 new SqlParameter("@Status", ballotBoxesDto.Status),
+                 new SqlParameter("@IsShow", 1)
             };
 
 
@@ -110,12 +145,15 @@ namespace Ejmmaa.Services.Implementations
         {
                 if (ballotBoxesDto == null) return false;
     
-                string query  = @"DELETE FROM Ballot_Boxes
-                                WHERE BoxId = @BoxId";
+                string query  = @"UPDATE Ballot_Boxes
+                                 SET IsShow = @IsShow,
+                                 WHERE BoxId = @BoxId
+                                 AND IsShow = 1";
              
                 var parameters = new[]
                 {
                     new SqlParameter("@BoxId", ballotBoxesDto.BoxId),
+                    new SqlParameter("@IsShow",SqlDbType.Bit){Value = 0}
                 };
 
                 int rowsAffected = _dbHelper.Execute(query, parameters);

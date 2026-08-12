@@ -9,6 +9,7 @@ namespace Ejmmaa.Models.ViewModels
         public string? PhoneNumber {get; set;}
         public DateTime BirthDate {get; set;}
         public char Gender {get; set;}
+        public int SectionId { get; set; }
         public string? SectionName { get; set; }
 
 

@@ -76,7 +76,7 @@ namespace Ejmmaa.Controllers
                 ClanId = clanId.Value
             };
             
-            var Clan = _clansService.GetClanData(user); 
+            var Clan = _clansService.GetAllClans(user); 
 
             var Sections = _sectionsService.GetAllSections(sections);
 

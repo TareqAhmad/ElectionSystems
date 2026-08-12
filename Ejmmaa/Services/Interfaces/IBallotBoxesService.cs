@@ -9,7 +9,7 @@ namespace Ejmmaa.Services.Interfaces
 
       public List<BallotBoxesViewModel> GetAllBallotBoxes(); 
 
-      public BallotBoxesViewModel GetBallotBox(); 
+      public BallotBoxesViewModel GetBallotBoxById(BallotBoxesDto ballotBoxesDto); 
 
       public bool AddBallotBox(BallotBoxesDto ballotBoxesDto); 
 

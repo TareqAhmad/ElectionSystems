@@ -29,11 +29,13 @@ namespace Ejmmaa.Services.Implementations
                             FROM Clan_Sections S
                             LEFT JOIN Clan_Members M ON S.SectionId = M.SectionId
                             WHERE S.ClanId = @ClanId
+                            AND S.IsShow = @IsShow
                             GROUP BY S.SectionId,S.SectionName"; 
             
             var parameters = new[]
             {
                 new SqlParameter("@ClanId", sectionDto.ClanId),
+                new SqlParameter("@IsShow",1)
             };               
             
          DataTable dt = _dbHelper.Select(query,parameters);       
@@ -65,12 +67,14 @@ namespace Ejmmaa.Services.Implementations
                             FROM Clan_Sections S
                             LEFT JOIN Clan_Members M ON S.SectionId = M.SectionId
                             WHERE S.ClanId = @ClanId AND S.SectionId = @SectionId
+                            AND S.IsShow = @IsShow
                             GROUP BY S.SectionId,S.SectionName"; 
             
             var parameters = new[]
             {
                 new SqlParameter("@ClanId", sectionDto.ClanId),
-                new SqlParameter("@SectionId", sectionDto.SectionId)
+                new SqlParameter("@SectionId", sectionDto.SectionId),
+                new SqlParameter("@IsShow",1)
             };               
             
          DataTable dt = _dbHelper.Select(query,parameters);       
@@ -111,12 +115,14 @@ namespace Ejmmaa.Services.Implementations
         {
             string query = @"UPDATE Clan_Sections
                              SET SectionName = @SectionName
-                             WHERE SectionId = @SectionId";
+                             WHERE SectionId = @SectionId
+                             AND IsShow = @IsShow";
 
             var parameters = new[]
             {
                 new SqlParameter("@SectionName", sectionDto.SectionName),
-                new SqlParameter("@SectionId", sectionDto.SectionId)
+                new SqlParameter("@SectionId", sectionDto.SectionId),
+                 new SqlParameter("@IsShow", 1)
             };
 
             int rowsAffected = _dbHelper.Execute(query, parameters);
@@ -126,12 +132,15 @@ namespace Ejmmaa.Services.Implementations
     
       public bool DeleteSection(SectionDto sectionDto)
         {
-            string query = @"DELETE FROM Clan_Sections
-                             WHERE SectionId = @SectionId";
+            string query = @"UPDATE  Clan_Sections
+                             SET IsShow = @IsShow
+                             WHERE SectionId = @SectionId
+                             AND IsShow = 1";
 
             var parameters = new[]
             {
-                new SqlParameter("@SectionId", sectionDto.SectionId)
+                new SqlParameter("@SectionId", sectionDto.SectionId),
+               new SqlParameter("@IsShow",SqlDbType.Bit){Value = 0}
             };
 
             int rowsAffected = _dbHelper.Execute(query, parameters);

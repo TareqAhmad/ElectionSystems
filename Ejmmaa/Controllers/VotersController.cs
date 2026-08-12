@@ -46,7 +46,6 @@ namespace Ejmmaa.Controllers
             return View();
         }
 
-
         public IActionResult VoterBallot2()
         {
             return View();
@@ -69,9 +68,12 @@ namespace Ejmmaa.Controllers
             }
 
             HttpContext.Session.SetInt32("UserId", userInfo.UserID);
+            HttpContext.Session.SetInt32("MemberId",userInfo.MemberId);
             HttpContext.Session.SetString("FullName", userInfo.FullName);
             HttpContext.Session.SetInt32("TenantId",userInfo.TenantId); 
             HttpContext.Session.SetInt32("ClanId", userInfo.ClanId);
+            HttpContext.Session.SetInt32("ElectionId",userInfo.ElectionId); 
+
 
             return Json(new { success = true, data = userInfo, message = "تم تسجيل الدخول بنجاح." });
        
@@ -95,6 +97,25 @@ namespace Ejmmaa.Controllers
         }
     
     
+       [SessionCheckFilter]
+       [HttpPost]
+       public IActionResult SubmitVote(VotingRegistryDto votingRegistryDto)
+        {    
+             int? MemberId = HttpContext.Session.GetInt32("MemberId"); 
+             int? ElectionId = HttpContext.Session.GetInt32("ElectionId"); 
+
+             votingRegistryDto.MemberId = MemberId.Value;
+             votingRegistryDto.ElectionId = ElectionId.Value; 
+             votingRegistryDto.BoxId = 1; 
+
+             var result = _votersService.SubmitVote(votingRegistryDto); 
+
+             if(result)
+               return Json(new {success = true,message = "تم تسجيل وصوتك بنجاح وسرية تامّة!"}); 
+            else
+              return Json(new {success = false ,message = "حدث خطأ اثناء التصويت"});  
+
+        }
     }
     
 }

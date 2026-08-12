@@ -27,12 +27,14 @@ namespace Ejmmaa.Services.Implementations
             string query = @"SELECT supervisorId,FullName
                              FROM Election_Supervisors
                              WHERE userName = @UserName 
-                             AND PasswordHash = @Password";
+                             AND PasswordHash = @Password
+                             AND IsShow = @IsShow";
             
             var parameters = new[]
             {
                 new SqlParameter("@UserName", loginRequest.UserName),
-                new SqlParameter("@Password", passwordHash)
+                new SqlParameter("@Password", passwordHash),
+                 new SqlParameter("@IsShow", 1)
             };
 
           DataTable dt = _dbHelper.Select(query,parameters);       
@@ -58,13 +60,15 @@ namespace Ejmmaa.Services.Implementations
             string query  = @"SELECT S.SupervisorId,S.FullName,S.NationalId,S.PhoneNumber,B.BoxNumber
                               FROM Election_Supervisors S
                               JOIN Ballot_Boxes B ON S.BoxId = B.BoxId
-                              WHERE IsActive = @IsActive"; 
+                              WHERE IsActive = @IsActive
+                              AND S.IsShow = @IsShow"; 
 
                       
                               
             var parameters = new[]
             {
-                new SqlParameter("@IsActive", 1)
+                new SqlParameter("@IsActive", 1),
+                 new SqlParameter("@IsShow", 1)
             };               
              
              
@@ -76,7 +80,7 @@ namespace Ejmmaa.Services.Implementations
                     {
                     var supervisor =  new ElectionSupervisorsViewModel
                         {
-                            SupervisorID  = Convert.ToInt32(row["SupervisorId"]),
+                            SupervisorId  = Convert.ToInt32(row["SupervisorId"]),
                             FullName = row["FullName"].ToString(),
                             NationalId = row["NationalId"].ToString(),
                             PhoneNumber = row["PhoneNumber"].ToString(),
@@ -91,19 +95,22 @@ namespace Ejmmaa.Services.Implementations
             return electionSupervisors; 
         } 
         
-        public ElectionSupervisorsViewModel GetSupervisorById(int supervisorId)
+        public ElectionSupervisorsViewModel GetSupervisorById(ElectionSupervisorsDto supervisorsDto)
         {
             string query  = @"SELECT S.SupervisorId,S.FullName,S.NationalId,S.PhoneNumber,B.BoxId,B.BoxNumber
                               FROM Election_Supervisors S
                               JOIN Ballot_Boxes B ON S.BoxId = B.BoxId
-                              WHERE SupervisorId = @SupervisorId AND IsActive = @IsActive"; 
+                              WHERE S.SupervisorId = @SupervisorId 
+                              AND S.IsActive = @IsActive
+                              AND S.IsShow = @IsShow"; 
 
                       
                               
             var parameters = new[]
             {
-                new SqlParameter("@SupervisorId", supervisorId),
-                new SqlParameter("@IsActive", 1)
+                new SqlParameter("@SupervisorId", supervisorsDto.SupervisorId),
+                new SqlParameter("@IsActive", 1),
+                 new SqlParameter("@IsShow", 1)
             };               
              
              
@@ -114,7 +121,7 @@ namespace Ejmmaa.Services.Implementations
                 var row = dt.Rows[0];
                 return new ElectionSupervisorsViewModel
                         {
-                            SupervisorID  = Convert.ToInt32(row["SupervisorId"]),
+                            SupervisorId  = Convert.ToInt32(row["SupervisorId"]),
                             FullName = row["FullName"].ToString(),
                             NationalId = row["NationalId"].ToString(),
                             PhoneNumber = row["PhoneNumber"].ToString(),
@@ -125,6 +132,7 @@ namespace Ejmmaa.Services.Implementations
 
             throw new InvalidOperationException("Supervisor not found");
         }
+     
         public bool AddSupervisor(ElectionSupervisorsDto electionSupervisorsDto)
         {
              if (electionSupervisorsDto == null) return false;
@@ -162,15 +170,17 @@ namespace Ejmmaa.Services.Implementations
                                   NationalId = @NationalId,
                                   PhoneNumber = @PhoneNumber,
                                   BoxId = @BoxId
-                              WHERE SupervisorId = @SupervisorId";
+                              WHERE SupervisorId = @SupervisorId
+                              AND IsShow = @IsShow";
          
             var parameters = new[]
             {
-                new SqlParameter("@SupervisorId", electionSupervisorsDto.SupervisorID),
+                new SqlParameter("@SupervisorId", electionSupervisorsDto.SupervisorId),
                 new SqlParameter("@FullName", electionSupervisorsDto.FullName),
                 new SqlParameter("@NationalId",electionSupervisorsDto.NationalId),
                 new SqlParameter("@PhoneNumber",electionSupervisorsDto.PhoneNumber),
-                new SqlParameter("@BoxId", electionSupervisorsDto.BoxId)
+                new SqlParameter("@BoxId", electionSupervisorsDto.BoxId),
+                 new SqlParameter("@IsShow", 1)
             };  
 
             int rowsAffected = _dbHelper.Execute(query, parameters);
@@ -184,13 +194,14 @@ namespace Ejmmaa.Services.Implementations
             if (electionSupervisorsDto == null) return false;
 
             string query  = @"UPDATE Election_Supervisors
-                              SET IsActive = @IsActive
-                              WHERE SupervisorId = @SupervisorId";
+                              SET IsShow = @IsShow
+                              WHERE SupervisorId = @SupervisorId
+                              AND IsShow = 1";
          
             var parameters = new[]
             {
-                new SqlParameter("@SupervisorId", electionSupervisorsDto.SupervisorID),
-                new SqlParameter("@IsActive", 0)
+                new SqlParameter("@SupervisorId", electionSupervisorsDto.SupervisorId),
+                new SqlParameter("@IsShow",SqlDbType.Bit){Value = 0}
             };  
 
             int rowsAffected = _dbHelper.Execute(query, parameters);

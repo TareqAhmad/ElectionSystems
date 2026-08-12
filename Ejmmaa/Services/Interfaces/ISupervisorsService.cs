@@ -11,7 +11,7 @@ namespace Ejmmaa.Services.Interfaces
         
         public List<ElectionSupervisorsViewModel> GetAllElectionSupervisors(); 
 
-        public ElectionSupervisorsViewModel GetSupervisorById(int supervisorId);
+        public ElectionSupervisorsViewModel GetSupervisorById(ElectionSupervisorsDto supervisorsDto);
 
         public bool AddSupervisor(ElectionSupervisorsDto electionSupervisorsDto); 
 

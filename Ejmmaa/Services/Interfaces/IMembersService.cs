@@ -8,7 +8,7 @@ namespace Ejmmaa.Services.Interfaces
     {
          
         public List<ClanMembersViewModel> GetClanMembersData(MemberDto memberDto); 
-         public ClanMembersViewModel GetClanMember(MemberDto memberDto); 
+         public ClanMembersViewModel GetMemberById(MemberDto memberDto); 
 
         public List<VotersViewModel> GetAllVoters(VotersDto votersDto); 
 

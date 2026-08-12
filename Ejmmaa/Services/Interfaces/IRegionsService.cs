@@ -8,8 +8,7 @@ namespace Ejmmaa.Services.Interfaces
     {
 
       public List<RegionsViewModel> GetAllRegions(); 
-      public RegionsViewModel GetRegionById(int RegionId); 
-
+      public RegionsViewModel GetRegionById(RegionDto regionDto); 
       public bool AddRegion(RegionDto regionDto); 
 
       public bool UpdateRegion(RegionDto regionDto);

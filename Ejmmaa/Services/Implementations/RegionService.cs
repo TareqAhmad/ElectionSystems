@@ -26,10 +26,15 @@ namespace Ejmmaa.Services.Implementations
             List<RegionsViewModel> regions = new List<RegionsViewModel>(); 
 
             string query = @"SELECT RegionId, RegionName
-                             FROM Regions"; 
+                             FROM Regions
+                             WHERE IsShow = @IsShow"; 
 
+             var sqlParameters = new []
+             {
+                  new SqlParameter("@IsShow", 1)
+             };
 
-             DataTable dt = _dbHelper.Select(query); 
+             DataTable dt = _dbHelper.Select(query,sqlParameters); 
 
             if (dt != null && dt.Rows.Count > 0)
             {  
@@ -51,15 +56,17 @@ namespace Ejmmaa.Services.Implementations
 
         }
     
-      public RegionsViewModel GetRegionById(int RegionId)
+      public RegionsViewModel GetRegionById(RegionDto regionDto)
         {
             string query = @"SELECT RegionId, RegionName
                              FROM Regions
-                             WHERE RegionId = @RegionId";
+                             WHERE RegionId = @RegionId
+                             AND IsShow = @IsShow";
                            
              var parameters = new[]
             {
-                new SqlParameter("@RegionId", RegionId),
+                new SqlParameter("@RegionId", regionDto.RegionId),
+                 new SqlParameter("@IsShow", 1)
             };
              
             DataTable dt = _dbHelper.Select(query, parameters);
@@ -104,12 +111,14 @@ namespace Ejmmaa.Services.Implementations
 
             string query  = @"UPDATE Regions
                               SET RegionName = @RegionName
-                              WHERE RegionId = @RegionId";
+                              WHERE RegionId = @RegionId
+                              AND IsShow = @IsShow";
          
             var parameters = new[]
             {
                 new SqlParameter("@RegionId", regionDto.RegionId),
                 new SqlParameter("@RegionName", regionDto.RegionName),
+                 new SqlParameter("@IsShow", 1)
             };      
 
             int rowsAffected = _dbHelper.Execute(query, parameters);
@@ -120,12 +129,15 @@ namespace Ejmmaa.Services.Implementations
 
       public bool DeleteRegion(RegionDto regionDto)
         {
-            string query = @"DELETE FROM Regions
-                             WHERE RegionId = @RegionId";
+            string query = @"UPDATE  Regions
+                             SET IsShow = @IsShow
+                             WHERE RegionId = @RegionId
+                             AND IsShow = 1";
 
             var parameters = new[]
             {
                 new SqlParameter("@RegionId", regionDto.RegionId),
+                new SqlParameter("@IsShow",SqlDbType.Bit){Value = 0}
             };
 
             int rowsAffected = _dbHelper.Execute(query, parameters);

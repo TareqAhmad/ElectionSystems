@@ -1,37 +1,43 @@
 let selectedCandidates = [];
-const maxSelections = 7;
+let maxSelectionsAllowed = 0;
 
 // تنفيذ الكود تلقائياً بمجرد تحميل الصفحة
 $(document).ready(function () {
     loadCandidates();
+
+    getMaxSelections(function (maxSelections) {
+        maxSelectionsAllowed = maxSelections;
+        $('#maxLimit').text(maxSelections);
+        $('#maxAllowed').text(maxSelections);
+    });
 });
 
 // 1. جلب بيانات المرشحين من السيرفر باستخدام jQuery AJAX
 function loadCandidates() {
-   
-   
-   apiRetrieve(
 
-      '/Candidates/GetAllCandidates', // ضع هنا المسار الصحيح للـ API لديك
-      null, // لا توجد بيانات إضافية للإرسال في هذه الحالة
-      function (response) {
-           if (response.success) {
-               renderCandidates(response.data);
-           } 
-      },
-      function (xhr, status, error) {
-          console.error("خطأ أثناء جلب بيانات المرشحين:", error);
-          $('#membersList').html(`
+
+    apiRetrieve(
+
+        '/Candidates/GetAllCandidates', // ضع هنا المسار الصحيح للـ API لديك
+        null, // لا توجد بيانات إضافية للإرسال في هذه الحالة
+        function (response) {
+            if (response.success) {
+                renderCandidates(response.data);
+            }
+        },
+        function (xhr, status, error) {
+            console.error("خطأ أثناء جلب بيانات المرشحين:", error);
+            $('#membersList').html(`
               <div class="col-12 text-center text-danger py-4">
                   <i class="bi bi-exclamation-triangle fs-1"></i>
                   <p class="mt-2">عذراً، تعذر تحميل بيانات المرشحين. يرجى تحديث الصفحة.</p>
               </div>
           `);
-      }
+        }
 
-   ); 
-   
- 
+    );
+
+
 }
 
 // 2. توليد وعرض بطاقات المرشحين داخل الـ HTML
@@ -64,6 +70,31 @@ function renderCandidates(candidates) {
     });
 }
 
+function getMaxSelections(callback) {
+    apiRetrieveCustomValue(
+        '/Elections/GetMaxSelection',
+        null,
+        function (resp) {
+            // التصحيح: استخدام resp للوصول للخصائص القادمة من الـ JSON
+            if (resp.success === true) {
+                // إرجاع القيمة عبر الـ callback
+                if (typeof callback === 'function') {
+                    callback(resp.data);
+                }
+            } else {
+                showToast(resp.message, 'error');
+                if (typeof callback === 'function') callback(0);
+            }
+        },
+        function (error) {
+            // التصحيح: استخدام error أو رسالة عامة لأن resp غير معرف هنا
+            var errorMsg = error && error.message ? error.message : "حدث خطأ أثناء الاتصال";
+            showToast(errorMsg, 'error');
+            if (typeof callback === 'function') callback(0);
+        }
+    );
+}
+
 // 3. دالة تحديد / إلغاء تحديد المرشح
 function toggleCandidate(element, candidateId, candidateName) {
     const $card = $(element);
@@ -77,8 +108,8 @@ function toggleCandidate(element, candidateId, candidateName) {
         $checkIcon.addClass('d-none');
     } else {
         // التحقق من الحد الأقصى المسموح به
-        if (selectedCandidates.length >= maxSelections) {
-            showToast(`عذراً، يمكنك اختيار حد أقصى هو ${maxSelections} مرشحين فقط.`, 'warning');
+        if (selectedCandidates.length >= maxSelectionsAllowed) {
+            showToast(`عذراً، يمكنك اختيار حد أقصى هو ${maxSelectionsAllowed} مرشحين فقط.`, 'warning');
             return;
         }
         // إضافة التحديد
@@ -96,13 +127,13 @@ function goToSummary() {
         showToast('الرجاء اختيار مرشح واحد على الأقل للمتابعة.', 'warning');
         return;
     }
-    
+
     $('#stepBallot').addClass('d-none');
     $('#stepSummary').removeClass('d-none');
-    
+
     const $summaryList = $('#selectedMembersSummary');
     $summaryList.empty();
-    
+
     selectedCandidates.forEach(candidate => {
         $summaryList.append(`
             <li class="mb-2 d-flex align-items-center">
@@ -123,10 +154,29 @@ function backToBallot() {
 function submitFinalVote() {
     if (confirm('هل أنت متأكد من رغبتك في اعتماد وإرسال صوتك نهائياً؟ لا يمكن التراجع بعد الإرسال.')) {
         let candidateIds = selectedCandidates.map(c => c.id);
-        
+
         // إرسال البيانات عبر AJAX (باستخدام apiService أو jQuery مباشرة)
+
+        apiAdd(
+            '/Voters/SubmitVote',
+            candidateIds,
+            function (resp) {
+                if (success == true) {
+                    showToast(resp.message, 'success');
+                    window.location.href = '/Voters/Success'; // التوجيه لصفحة النجاح
+                    e
+                }
+
+            },
+            function (error) {
+                showToast('حدث خطأ أثناء إرسال الصوت. يرجى المحاولة مرة أخرى.', 'error');
+                console.error(xhr.responseText);
+
+            }
+        );
+        /*
         $.ajax({
-            url: '/api/Voters/SubmitVote', // مسار استقبال الأصوات في الـ Controller
+            url: '/Voters/SubmitVote', // مسار استقبال الأصوات في الـ Controller
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ candidateIds: candidateIds }),
@@ -135,9 +185,9 @@ function submitFinalVote() {
                 window.location.href = '/Voters/Success'; // التوجيه لصفحة النجاح
             },
             error: function (xhr) {
-                showToast('حدث خطأ أثناء إرسال الصوت. يرجى المحاولة مرة أخرى.','error');
+                showToast('حدث خطأ أثناء إرسال الصوت. يرجى المحاولة مرة أخرى.', 'error');
                 console.error(xhr.responseText);
             }
-        });
+        });*/
     }
 }

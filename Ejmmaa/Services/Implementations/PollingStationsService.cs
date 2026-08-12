@@ -27,10 +27,15 @@ namespace Ejmmaa.Services.Implementations
 
             string query = @"SELECT stationId, stationName, RegionName,LocationDetails
                              FROM Polling_Stations S
-                             LEFT JOIN Regions R ON S.RegionId = R.RegionId"; 
+                             LEFT JOIN Regions R ON S.RegionId = R.RegionId
+                             WHERE S.IsShow = @IsShow"; 
+              
+              var sqlParameters  = new[]
+              {
+                  new SqlParameter("@IsShow",SqlDbType.Bit){Value = 1}
+              };
 
-
-             DataTable dt = _dbHelper.Select(query); 
+             DataTable dt = _dbHelper.Select(query,sqlParameters); 
 
             if (dt != null && dt.Rows.Count > 0)
             {  
@@ -54,16 +59,18 @@ namespace Ejmmaa.Services.Implementations
 
         }
     
-      public PollingStationsViewModel GetPollingStationById(int pollingStationId)
+      public PollingStationsViewModel GetPollingStationById(PollingStationsDto pollingStationDto)
         {
             string query = @"SELECT S.stationId, S.stationName, R.RegionId, R.RegionName, S.LocationDetails
                              FROM Polling_Stations S
                              LEFT JOIN Regions R ON S.RegionId = R.RegionId
-                             WHERE S.stationId = @stationId";
+                             WHERE S.stationId = @stationId
+                             AND S.IsShow = @IsShow";
 
             var parameters = new[]
             {
-                new SqlParameter("@stationId", pollingStationId)
+                new SqlParameter("@stationId", pollingStationDto.StationId),
+                 new SqlParameter("@IsShow", 1)
             };
 
             DataTable dt = _dbHelper.Select(query, parameters);
@@ -111,10 +118,11 @@ namespace Ejmmaa.Services.Implementations
             if (pollingStationsDto == null) return false;
 
             string query  = @"UPDATE Polling_Stations
-                            SET StationName = @StationName,
+                               SET StationName = @StationName,
                                 RegionId = @RegionId,
                                 LocationDetails = @LocationDetails
-                            WHERE StationId = @StationId";
+                            WHERE StationId = @StationId
+                            AND IsShow = @IsShow";
          
             var parameters = new[]
             {
@@ -122,6 +130,7 @@ namespace Ejmmaa.Services.Implementations
                 new SqlParameter("@StationName", pollingStationsDto.StationName),
                 new SqlParameter("@RegionId", pollingStationsDto.RegionId),
                 new SqlParameter("@LocationDetails", pollingStationsDto.LocationDetails),
+                 new SqlParameter("@IsShow", 1)
             };
 
             int rowsAffected = _dbHelper.Execute(query, parameters);
@@ -134,11 +143,15 @@ namespace Ejmmaa.Services.Implementations
         {
             if (pollingStationsDto == null) return false;
 
-            string query = @"DELETE FROM Polling_Stations WHERE StationId = @StationId";
+            string query = @"UPDATE  Polling_Stations
+                           SET IsShow = @IsShow 
+                           WHERE StationId = @StationId
+                           AND IsShow = 1";
 
             var parameters = new[]
             {
-                new SqlParameter("@StationId", pollingStationsDto.StationId)
+                new SqlParameter("@StationId", pollingStationsDto.StationId),
+                 new SqlParameter("@IsShow",SqlDbType.Bit){Value = 0}
             };
 
             int rowsAffected = _dbHelper.Execute(query, parameters);

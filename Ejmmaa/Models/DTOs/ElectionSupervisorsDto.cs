@@ -2,7 +2,7 @@
 namespace Ejmmaa.Models.DTOs
 {   
 public class ElectionSupervisorsDto {
-     public int SupervisorID { get; set; } 
+     public int SupervisorId { get; set; } 
      public string? FullName { get; set; } 
      public string? NationalId { get; set; } 
      public string? PhoneNumber { get; set; } 

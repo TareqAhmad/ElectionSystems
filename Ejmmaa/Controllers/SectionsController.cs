@@ -40,16 +40,83 @@ namespace Ejmmaa.Controllers
             return View(); 
         }
 
-        public IActionResult Edit()
+        public IActionResult Edit(int sectionId)
         {
-            return View(); 
+            int? clanId = HttpContext.Session.GetInt32("ClanId");
+
+            var sectionObject = new SectionDto
+            {
+                SectionId = sectionId,
+                ClanId = clanId.Value
+            };
+
+            var section = _sectionsService.GetSectionById(sectionObject); 
+
+            var sectionViewModel = new SectionsViewModel
+            {
+                SectionId = section.SectionId,
+                SectionName = section.SectionName,
+            };
+
+            return View(sectionViewModel); 
         }
 
-        public IActionResult Delete()
+
+        public IActionResult Delete(int sectionId)
         {
-            return View(); 
+           int? clanId =HttpContext.Session.GetInt32("ClanId"); 
+
+            var sectionObject = new SectionDto
+            {
+                SectionId = sectionId,
+                ClanId = clanId.Value
+            };
+
+            var section = _sectionsService.GetSectionById(sectionObject); 
+
+            var sectionViewModel = new SectionsViewModel
+            {
+                SectionId = section.SectionId,
+                SectionName = section.SectionName,
+            };
+
+            return View(sectionViewModel); 
         }
        
+       public IActionResult GetAllSections()
+        {
+            int? clanId = HttpContext.Session.GetInt32("ClanId");
+
+            var sectionObject = new SectionDto
+            {
+                ClanId = clanId.Value,
+            };
+
+            var sections = _sectionsService.GetAllSections(sectionObject);
+
+            if(sections == null)
+               return Json(new {success = false, message = "لا يوجد بيانات"});
+
+               return Json(new {success = true , data = sections});
+        }
+      
+       public IActionResult GetSectionsById(int sectionId)
+        {
+                   int? clanId = HttpContext.Session.GetInt32("ClanId");
+
+            var sectionObject = new SectionDto
+            {
+                ClanId = clanId.Value,
+            };
+
+            var sections = _sectionsService.GetSectionById(sectionObject);
+
+            if(sections == null)
+               return Json(new {success = false, message = "لا يوجد بيانات"});
+
+               return Json(new {success = true , data = sections});  
+        }
+    
        public IActionResult SaveSection([FromBody]SectionDto  sectionDto)
         {
             int? clanId = HttpContext.Session.GetInt32("ClanId"); 
@@ -64,7 +131,36 @@ namespace Ejmmaa.Controllers
              return Json(new {success = false ,message = "حدث خطأ اثناء الاضافة"});  
         }
 
+       public IActionResult UpdateSection([FromBody]SectionDto  sectionDto)
+        {
+            int? clanId = HttpContext.Session.GetInt32("ClanId"); 
+
+              sectionDto.ClanId = clanId.Value; 
+             
+              var result  = _sectionsService.UpdateSection(sectionDto); 
+             
+             if(result)
+               return Json(new {success = true,message = "تم التعديل بنجاح"}); 
+            else
+             return Json(new {success = false ,message = "حدث خطأ اثناء التعديل"});
+
+  
+  
     }
 
+       public IActionResult DeleteSection([FromBody] SectionDto sectionDto)
+        {
+             int? clanId = HttpContext.Session.GetInt32("ClanId"); 
 
+              sectionDto.ClanId = clanId.Value; 
+             
+            var result  = _sectionsService.DeleteSection(sectionDto); 
+             
+             if(result)
+               return Json(new {success = true,message = "تم الحذف بنجاح"}); 
+            else
+             return Json(new {success = false ,message = "حدث خطأ اثناء الحذف"});
+        }
+  
+    }
 }

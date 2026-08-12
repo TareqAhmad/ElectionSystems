@@ -37,11 +37,13 @@ namespace Ejmmaa.Services.Implementations
                             FROM Candidates c
                             INNER JOIN Clan_Members m ON c.MemberID = m.MemberID
                             INNER JOIN Candidacy_Types t ON c.TypeID = t.TypeID
-                            WHERE c.ElectionId = @ElectionId;"; 
+                            WHERE c.ElectionId = @ElectionId
+                            AND C.IsShow = @IsShow;"; 
 
             var parameters = new[]
             {
-                new SqlParameter("@ElectionId",candidatesDto.ElectionId)
+                new SqlParameter("@ElectionId",candidatesDto.ElectionId),
+                 new SqlParameter("@IsShow", 1)
             };
                             
                             
@@ -71,7 +73,7 @@ namespace Ejmmaa.Services.Implementations
     }
      
     
-      public CandidatesViewModel GetCandidateById(int candidateId)
+      public CandidatesViewModel GetCandidateById(CandidatesDto candidatesDto)
         {
             string query = @"SELECT 
                                 c.CandidateID,
@@ -90,11 +92,13 @@ namespace Ejmmaa.Services.Implementations
                             INNER JOIN Clan_Members m ON c.MemberID = m.MemberID
                             INNER JOIN Candidacy_Types t ON c.TypeID = t.TypeID
                             Inner JOIN Clan_Elections e ON c.ElectionId = e.ElectionId
-                            WHERE c.CandidateID = @CandidateId;"; 
+                            WHERE c.CandidateID = @CandidateId
+                            AND C.IsShow = @IsShow;"; 
 
             var parameters = new[]
             {
-                new SqlParameter("@CandidateId", candidateId)
+                new SqlParameter("@CandidateId", candidatesDto.CandidateId),
+                 new SqlParameter("@IsShow", 1)
             };
 
             DataTable dt = _dbHelper.Select(query, parameters);
@@ -148,17 +152,19 @@ namespace Ejmmaa.Services.Implementations
             if (candidatesDto == null) return false;
 
             string query  = @"UPDATE Candidates
-                            SET ElectionId = @ElectionId,
-                                MemberId = @MemberId,
-                                TypeId = @TypeId
-                            WHERE CandidateId = @CandidateId";
+                              SET ElectionId = @ElectionId,
+                                    MemberId = @MemberId,
+                                    TypeId = @TypeId
+                            WHERE CandidateId = @CandidateId
+                            AND IsShow = @IsShow";
          
             var parameters = new[]
             {
                 new SqlParameter("@ElectionId", candidatesDto.ElectionId),
                 new SqlParameter("@MemberId", candidatesDto.MemberId),
                 //new SqlParameter("@TypeId", candidatesDto.TypeId),
-                new SqlParameter("@CandidateId", candidatesDto.CandidateId)
+                new SqlParameter("@CandidateId", candidatesDto.CandidateId),
+                 new SqlParameter("@IsShow", 1)
             };
 
             int rowsAffected = _dbHelper.Execute(query, parameters);
@@ -166,18 +172,19 @@ namespace Ejmmaa.Services.Implementations
             return rowsAffected > 0;
       }        
    
-   
-
      public bool DeleteCandidate(CandidatesDto candidatesDto)
         {
                 if (candidatesDto == null) return false;
     
-                string query  = @"DELETE FROM Candidates
-                                WHERE CandidateId = @CandidateId";
+                string query  =@"UPDATE Candidates
+                                 SET IsShow = @IsShow,
+                                 WHERE CandidateId = @CandidateId
+                                 AND IsShow = 1;";
              
                 var parameters = new[]
                 {
-                    new SqlParameter("@CandidateId", candidatesDto.CandidateId)
+                    new SqlParameter("@CandidateId", candidatesDto.CandidateId),
+                    new SqlParameter("@IsShow",SqlDbType.Bit){Value = 0}
                 };
     
                 int rowsAffected = _dbHelper.Execute(query, parameters);

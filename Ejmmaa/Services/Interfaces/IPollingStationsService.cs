@@ -8,8 +8,7 @@ namespace Ejmmaa.Services.Interfaces
     {
 
       public List<PollingStationsViewModel> GetAllPollingStations(); 
-      public PollingStationsViewModel GetPollingStationById(int pollingStationId); 
-
+      public PollingStationsViewModel GetPollingStationById(PollingStationsDto pollingStationDto); 
       public bool AddPollingStation(PollingStationsDto pollingStationsDto); 
 
       public bool UpdatePollingStation(PollingStationsDto pollingStationsDto);

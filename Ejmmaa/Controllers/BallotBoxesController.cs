@@ -35,14 +35,20 @@ namespace Ejmmaa.Controllers
 
         public IActionResult Edit(int ballotBoxId)
         {
-           // var ballotBox = _ballotBoxesService.GetBallotBoxById(ballotBoxId);
-            return View();
+            var ballotBoxObject = new BallotBoxesDto { BoxId = ballotBoxId };
+
+            var ballotBox = _ballotBoxesService.GetBallotBoxById(ballotBoxObject);
+
+            return View(ballotBox);
         }
 
         public IActionResult Delete(int ballotBoxId)
         {
-            // var ballotBox = _ballotBoxesService.GetBallotBoxById(ballotBoxId);
-            return View();
+            var ballotBoxObject = new BallotBoxesDto { BoxId = ballotBoxId };
+
+            var ballotBox = _ballotBoxesService.GetBallotBoxById(ballotBoxObject);
+            
+            return View(ballotBox);
         }
 
 

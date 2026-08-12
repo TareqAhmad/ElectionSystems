@@ -35,14 +35,18 @@ namespace Ejmmaa.Controllers
 
         public IActionResult Edit(int RegionId)
         {
-            var region = _regionsService.GetRegionById(RegionId);
+            var regionObject = new RegionDto {RegionId = RegionId}; 
             
-            return View(region); 
+            var region = _regionsService.GetRegionById(regionObject);
+           
+           return View(region);
         }
 
         public IActionResult Delete(int RegionId)
         {
-            var region = _regionsService.GetRegionById(RegionId);
+            var regionObject = new RegionDto {RegionId = RegionId}; 
+
+            var region = _regionsService.GetRegionById(regionObject);
            
            return View(region);
         }
@@ -60,6 +64,23 @@ namespace Ejmmaa.Controllers
                 // إرجاعها بنفس النمط (success و data)
                 return Json(new { success = true, data = regions });
         }
+     
+      public IActionResult GetRegionById(int RegionId)
+        {
+            var regionObject  = new RegionDto
+            {
+                RegionId = RegionId
+            };
+
+            var region = _regionsService.GetRegionById(regionObject);
+
+            if (region == null)
+            {
+                return Json(new { success = false, message = "لا توجد بيانات" });
+            }
+
+            return Json(new { success = true, data = region });
+        }
        public IActionResult AddRegion([FromBody]RegionDto regionDto)
         {
              var Result = _regionsService.AddRegion(regionDto); 
@@ -70,8 +91,28 @@ namespace Ejmmaa.Controllers
                 return Json(new{success = false ,message = "حدث خطأ اثناء الاضافة"});
           
         }
-       
+       public IActionResult UpdateRegion([FromBody]RegionDto regionDto)
+        {
+             var Result = _regionsService.UpdateRegion(regionDto); 
 
+            if(Result)
+                return Json(new {success = true,message = "تم التعديل بنجاح"}); 
+            else
+                return Json(new{success = false ,message = "حدث خطأ اثناء التعديل"});
+          
+        }
+       
+       public IActionResult DeleteRegion([FromBody]RegionDto regionDto)
+        {
+             var Result = _regionsService.DeleteRegion(regionDto); 
+
+            if(Result)
+                return Json(new {success = true,message = "تم الحذف بنجاح"}); 
+            else
+                return Json(new{success = false ,message = "حدث خطأ اثناء الحذف"});
+          
+        }
+       
 
 
     }

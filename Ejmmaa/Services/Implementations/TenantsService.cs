@@ -38,11 +38,13 @@ namespace Ejmmaa.Services.Implementations
                                   END AS Status
                               FROM TenantSubscriptions ts
                               INNER JOIN Tenants t ON ts.TenantID = t.TenantID
-                              INNER JOIN Packages p ON ts.PackageID = p.PackageID;";
+                              INNER JOIN Packages p ON ts.PackageID = p.PackageID;
+                              AND ts.IsShow = @IsShow";
 
              SqlParameter[] parameters = new SqlParameter[]
              {
-                 new SqlParameter("@IsActive", tenantsDto.IsActive)
+                 new SqlParameter("@IsActive", tenantsDto.IsActive),
+                  new SqlParameter("@IsShow", 1)
              };
 
              var dataTable = _dbHelper.Select(query, parameters);

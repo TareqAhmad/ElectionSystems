@@ -29,11 +29,13 @@ namespace Ejmmaa.Services.Implementations
             string query = @"SELECT MemberId,fullName,NationalId,PhoneNumber,BirthDate,Gender,S.SectionName
                             FROM Clan_Members M
                             join Clan_Sections S on M.SectionId = S.SectionId
-                            where M.ClanId = @ClanId"; 
+                            where M.ClanId = @ClanId
+                            AND M.IsShow = @IsShow"; 
             
             var parameters = new[]
             {
                 new SqlParameter("@ClanId",member.ClanId),
+                 new SqlParameter("@IsShow", 1)
             };               
             
             DataTable dt = _dbHelper.Select(query,parameters);       
@@ -61,10 +63,52 @@ namespace Ejmmaa.Services.Implementations
             return clanMembers; 
         }
    
-         public ClanMembersViewModel GetClanMember(MemberDto memberDto)
+         public ClanMembersViewModel GetMemberById(MemberDto memberDto)
         {
-           var  a  = new ClanMembersViewModel();
-           return  a; 
+            if (memberDto.MemberId <= 0 || memberDto.ClanId <= 0 || memberDto == null)
+            {
+               return null; // أو يمكنك رمي استثناء أو التعامل مع الحالة بطريقة أخرى
+            }
+
+            string query = @"SELECT MemberId,fullName,NationalId,PhoneNumber,BirthDate,Gender,
+                             S.SectionId, S.SectionName
+                            FROM Clan_Members M
+                            join Clan_Sections S on M.SectionId = S.SectionId
+                            where M.MemberId = @MemberId 
+                            AND M.ClanId = @ClanId
+                            AND M.IsShow = @IsShow";
+
+            var parameters = new[]
+            {
+                new SqlParameter("@MemberId", memberDto.MemberId),
+                new SqlParameter("@ClanId", memberDto.ClanId),
+                new SqlParameter("@IsShow", 1)
+            };
+            
+            DataTable dt = _dbHelper.Select(query,parameters);       
+          
+            if (dt != null && dt.Rows.Count > 0)
+            {  
+                foreach (DataRow row in dt.Rows)
+                {
+                    var clanMember = new ClanMembersViewModel
+                    {
+                        // تأكد أن أسماء الخصائص تطابق الـ ViewModel تماماً
+                        MemberId = Convert.ToInt32(row["MemberId"]), 
+                        FullName = row["FullName"].ToString(),
+                        NationalId =  row["NationalId"].ToString(),
+                        PhoneNumber =  row["PhoneNumber"].ToString(),
+                        BirthDate = Convert.ToDateTime(row["BirthDate"]),
+                        Gender = Convert.ToChar(row["Gender"]),
+                        SectionId = Convert.ToInt32(row["SectionId"]),
+                        SectionName = row["SectionName"].ToString()
+                    };
+
+                    return clanMember; // حرف A كبير في Add
+                }
+            }
+
+            return null; 
         }
 
         public List<VotersViewModel> GetAllVoters(VotersDto votersDto)
@@ -74,12 +118,14 @@ namespace Ejmmaa.Services.Implementations
             string query = @"SELECT MemberId,fullName,NationalId,PhoneNumber,BirthDate,Gender,IsEligible
                             FROM Clan_Members
                             where ClanId = @ClanId
-                            AND IsEligible = @IsEligible"; 
+                            AND IsEligible = @IsEligible
+                            AND IsShow = @IsShow"; 
             
             var parameters = new[]
             {
                 new SqlParameter("@ClanId",votersDto.ClanId),
                 new SqlParameter("@IsEligible",1),
+                 new SqlParameter("@IsShow", 1)
             };               
             
              DataTable dt = _dbHelper.Select(query,parameters);       
@@ -133,25 +179,34 @@ namespace Ejmmaa.Services.Implementations
             return rowsAffected > 0;
         }
 
-        
+    
         public bool UpdateMember(MemberDto memberDto)
         {
+            if(memberDto == null || memberDto.MemberId <= 0)
+            {
+                return false; // أو يمكنك رمي استثناء أو التعامل مع الحالة بطريقة أخرى
+            };
+
             string query = @"UPDATE Clan_Members 
                              SET FullName = @FullName, 
                                  NationalId = @NationalId, 
                                  PhoneNumber = @PhoneNumber, 
                                  SectionId = @SectionId, 
                                  BirthDate = @BirthDate
-                             WHERE MemberId = @MemberId";
+                             WHERE MemberId = @MemberId
+                             AND ClanId = @ClanId
+                             AND IsShow = @IsShow"; // تأكد من إضافة شرط ClanId إذا كان ذلك ضرورياً
 
             var parameters = new[]
             {
+                new SqlParameter("@MemberId", memberDto.MemberId),
                 new SqlParameter("@FullName", memberDto.FullName),
                 new SqlParameter("@NationalId", memberDto.NationalId),
                 new SqlParameter("@PhoneNumber", memberDto.PhoneNumber),
-                new SqlParameter("@SectionId", memberDto.SectionId),
                 new SqlParameter("@BirthDate", (object)memberDto.BirthDate ?? DBNull.Value), // لحماية التاريخ إذا كان فارغاً
-                new SqlParameter("@MemberId", memberDto.MemberId)
+                new SqlParameter("@SectionId", memberDto.SectionId),
+                new SqlParameter("@ClanId", memberDto.ClanId),
+                 new SqlParameter("@IsShow", 1)
             };
 
             int rowsAffected = _dbHelper.Execute(query, parameters);
@@ -162,11 +217,17 @@ namespace Ejmmaa.Services.Implementations
   
         public bool DeleteMember(MemberDto memberDto)
         {
-            string query = @"DELETE FROM Clan_Members WHERE MemberId = @MemberId";
+            string query = @"UPDATE Clan_Members 
+                            SET IsShow = @IsShow
+                            WHERE ClanId = @ClanId
+                            AND MemberId = @MemberId
+                            AND IsShow = 1";
 
             var parameters = new[]
             {
-                new SqlParameter("@MemberId", memberDto.MemberId)
+                new SqlParameter("@ClanId", memberDto.ClanId),
+                new SqlParameter("@MemberId", memberDto.MemberId),
+                new SqlParameter("@IsShow",SqlDbType.Bit){Value = 0}
             };
 
             int rowsAffected = _dbHelper.Execute(query, parameters);

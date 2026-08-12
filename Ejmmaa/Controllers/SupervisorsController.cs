@@ -38,14 +38,19 @@ namespace Ejmmaa.Controllers
 
         public IActionResult Edit(int supervisorId)
         {
-            var supervisor = _supervisorsService.GetSupervisorById(supervisorId);
+             var supervisorObject = new ElectionSupervisorsDto {SupervisorId = supervisorId};
+             
+             var supervisor = _supervisorsService.GetSupervisorById(supervisorObject);
 
-            return View(supervisor);
+             return View(supervisor);
         }
 
         public IActionResult Delete(int supervisorId)
         {
-            var supervisor = _supervisorsService.GetSupervisorById(supervisorId);
+
+             var supervisorObject = new ElectionSupervisorsDto {SupervisorId = supervisorId};
+             
+             var supervisor = _supervisorsService.GetSupervisorById(supervisorObject);
 
             return View(supervisor);
         }
@@ -84,8 +89,29 @@ namespace Ejmmaa.Controllers
                 return Json(new{success = false ,message = "حدث خطأ اثناء الاضافة"});
             
         }
-   
-   
+
+        public IActionResult UpdateSupervisor([FromBody]ElectionSupervisorsDto electionSupervisorsDto)
+        {
+            
+             var Result = _supervisorsService.UpdateSupervisor(electionSupervisorsDto); 
+
+            if(Result)
+                return Json(new {success = true,message = "تم التحديث بنجاح"}); 
+            else
+                return Json(new{success = false ,message = "حدث خطأ اثناء التحديث"});
+            
+        }
+        public IActionResult DeleteSupervisor([FromBody] ElectionSupervisorsDto electionSupervisorsDto)
+        {
+                        
+             var Result = _supervisorsService.DeleteSupervisor(electionSupervisorsDto); 
+
+            if(Result)
+                return Json(new {success = true,message = "تم الحذف بنجاح"}); 
+            else
+                return Json(new{success = false ,message = "حدث خطأ اثناء الحذف"});
+            
+        }
    
     }
     

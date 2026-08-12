@@ -5,12 +5,12 @@ function showToast(msg, iconType = 'success') {
         showConfirmButton: false,
         timer: 5000, // يختفي بعد 3 ثوانٍ
         timerProgressBar: true,
-        background:'#333',
-        color:'#fff',
+        background: '#333',
+        color: '#fff',
 
 
         customClass: {
-            title: 'my-toast-title' 
+            title: 'my-toast-title'
         }
     });
 
@@ -26,18 +26,18 @@ function showToast(msg, iconType = 'success') {
 
 
 
-function apiLogin(pathEndpoint,userData, onSuccess, onError) {
-  
+function apiLogin(pathEndpoint, userData, onSuccess, onError) {
+
     $.ajax({
         url: pathEndpoint,
         method: "POST", //      
         contentType: "application/json; charset=utf-8",
         dataType: "json", //      
         data: JSON.stringify(userData),
-        success: function(data) {
+        success: function (data) {
             if (onSuccess) onSuccess(data);
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             //          
             const errorMessage = xhr.responseJSON ? xhr.responseJSON.message : error;
             if (onError) onError(errorMessage);
@@ -47,24 +47,49 @@ function apiLogin(pathEndpoint,userData, onSuccess, onError) {
 
 
 function apiRetrieve(pathEndpoint, userData, onSuccess, onError) {
-  
-      var ajaxConfig = {
-         url: pathEndpoint,
-         method: "GET", //      
-         contentType: "application/json; charset=utf-8",
-         dataType: "json", 
-        success: function(data) {
+
+    var ajaxConfig = {
+        url: pathEndpoint,
+        method: "GET", //      
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
             if (onSuccess) onSuccess(data);
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             //          
             const errorMessage = xhr.responseJSON ? xhr.responseJSON.message : error;
             if (onError) onError(errorMessage);
         }
-      }; 
-      if(userData){
+    };
+    if (userData) {
         ajaxConfig.data = JSON.stringify(userData)
-      }
+    }
+
+
+    $.ajax(ajaxConfig);
+}
+
+
+function apiRetrieveCustomValue(pathEndpoint, filterData, onSuccess, onError) {
+
+    var ajaxConfig = {
+        url: pathEndpoint,
+        method: "GET", //      
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            if (onSuccess) onSuccess(data);
+        },
+        error: function (xhr, status, error) {
+            //          
+            const errorMessage = xhr.responseJSON ? xhr.responseJSON.message : error;
+            if (onError) onError(errorMessage);
+        }
+    };
+    if (filterData) {
+        ajaxConfig.data = JSON.stringify(filterData)
+    }
 
 
     $.ajax(ajaxConfig);
@@ -72,22 +97,66 @@ function apiRetrieve(pathEndpoint, userData, onSuccess, onError) {
 
 
 function apiAdd(pathEndpoint, AddData, onSuccess, onError) {
-  
-      var ajaxConfig = {
-         url: pathEndpoint,
-         method: "POST", //      
-         contentType: "application/json; charset=utf-8",
-         dataType: "json", 
-         data:JSON.stringify(AddData),
-        success: function(data) {
+
+    var ajaxConfig = {
+        url: pathEndpoint,
+        method: "POST", //      
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify(AddData),
+        success: function (data) {
             if (onSuccess) onSuccess(data);
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             //          
             const errorMessage = xhr.responseJSON ? xhr.responseJSON.message : error;
             if (onError) onError(errorMessage);
         }
-      }; 
+    };
+
+    $.ajax(ajaxConfig);
+}
+
+
+function apiUpdate(pathEndpoint, UpdateData, onSuccess, onError) {
+
+
+    var ajaxConfig = {
+        url: pathEndpoint,
+        method: "POST", //      
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify(UpdateData),
+        success: function (data) {
+            if (onSuccess) onSuccess(data);
+        },
+        error: function (xhr, status, error) {
+            //          
+            const errorMessage = xhr.responseJSON ? xhr.responseJSON.message : error;
+            if (onError) onError(errorMessage);
+        }
+    };
+
+    $.ajax(ajaxConfig);
+}
+
+function apiDelete(pathEndpoint, DeleteData, onSuccess, onError) {
+
+    var ajaxConfig = {
+        url: pathEndpoint,
+        method: "POST", //      
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify(DeleteData),
+        success: function (data) {
+            if (onSuccess) onSuccess(data);
+        },
+        error: function (xhr, status, error) {
+            //          
+            const errorMessage = xhr.responseJSON ? xhr.responseJSON.message : error;
+            if (onError) onError(errorMessage);
+        }
+    };
 
     $.ajax(ajaxConfig);
 }

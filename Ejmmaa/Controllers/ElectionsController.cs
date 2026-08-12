@@ -39,17 +39,24 @@ namespace Ejmmaa.Controllers
             return View(); 
         }
 
-        public IActionResult Edit()
+        public IActionResult Edit(int electionId)
         {
-            return View(); 
-        }
+            var electionObject = new ElectionDto { ElectionId = electionId };
 
-        public IActionResult Delete()
+            var election = _electionsService.GetElectionById(electionObject);
+
+            return View(election);
+        }
+  
+        public IActionResult Delete(int electionId)
         {
-            return View(); 
+            var electionObject = new ElectionDto { ElectionId = electionId };
+
+            var election = _electionsService.GetElectionById(electionObject);
+
+            return View(election);
         }
        
-
         public IActionResult GetAllElections()
         {
             int? clanId = HttpContext.Session.GetInt32("ClanId"); 
@@ -76,6 +83,38 @@ namespace Ejmmaa.Controllers
 
         }
 
+       public IActionResult GetElectionById(int electionId)
+        {
+            var electionObject = new ElectionDto { ElectionId = electionId };
+
+            var election = _electionsService.GetElectionById(electionObject);
+
+            if (election == null)
+            {
+                return Json(new { success = false, message = "لا توجد بيانات" });
+            }
+
+            return Json(new { success = true, data = election });
+        }
+      
+
+      public IActionResult GetMaxSelection()
+        {
+            int? ClanId  = HttpContext.Session.GetInt32("ClanId"); 
+            
+            var electionObj = new ElectionDto()
+            {
+                ClanID = ClanId.Value
+            }; 
+
+            int maxSelection = _electionsService.GetMaxSelection(electionObj); 
+             
+            if(maxSelection == 0)
+                return Json(new {success = false, message  = "لا يوجد بيانات"}); 
+
+            return Json(new {success = true, data = maxSelection} ); 
+
+        }
        public IActionResult AddElection([FromBody]ElectionDto electionDto)
         {
             int? clanId = HttpContext.Session.GetInt32("ClanId"); 
@@ -91,6 +130,25 @@ namespace Ejmmaa.Controllers
           
         }
 
+       public IActionResult UpdateElection([FromBody]ElectionDto electionDto)
+        {
+            var Result = _electionsService.UpdateElection(electionDto); 
+
+            if(Result)
+                return Json(new {success = true,message = "تم التعديل بنجاح"}); 
+            else
+                return Json(new{success = false ,message = "حدث خطأ اثناء التعديل"});
+        }
+
+       public IActionResult DeleteElection([FromBody]ElectionDto electionDto)
+          {
+                var Result = _electionsService.DeleteElection(electionDto); 
+    
+                if(Result)
+                 return Json(new {success = true,message = "تم الحذف بنجاح"}); 
+                else
+                 return Json(new{success = false ,message = "حدث خطأ اثناء الحذف"});
+          }
 
     }
 

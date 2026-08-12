@@ -9,7 +9,10 @@ namespace Ejmmaa.Services.Interfaces
 
           public List<ElectionsViewModel> GetAllElections(ElectionDto electionDto); 
 
+          public ElectionsViewModel GetElectionById(ElectionDto electionDto);
 
+          public int GetMaxSelection(ElectionDto electionDto); 
+          
           public bool AddElection(ElectionDto electionDt); 
 
           public bool UpdateElection(ElectionDto electionDto);

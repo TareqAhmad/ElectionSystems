@@ -27,12 +27,14 @@ namespace Ejmmaa.Services.Implementations
             string query = @"SELECT userId,FullName
                              FROM System_Users
                              WHERE Email = @UserName 
-                             AND PasswordHash = @Password";
+                             AND PasswordHash = @Password
+                             AND IsShow = @IsShow";
             
             var parameters = new[]
             {
                 new SqlParameter("@UserName", loginRequest.UserName),
-                new SqlParameter("@Password", passwordHash)
+                new SqlParameter("@Password", passwordHash),
+                 new SqlParameter("@IsShow", 1)
             };
 
           DataTable dt = _dbHelper.Select(query,parameters);       

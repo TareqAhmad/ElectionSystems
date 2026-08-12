@@ -9,7 +9,7 @@ namespace Ejmmaa.Services.Interfaces
 
         public List<CandidatesViewModel> GetAllCandidates(CandidatesDto candidatesDto); 
         
-        public CandidatesViewModel GetCandidateById(int candidateId);
+        public CandidatesViewModel GetCandidateById(CandidatesDto candidatesDto);
 
         public bool AddCandidate(CandidatesDto candidatesDto); 
 

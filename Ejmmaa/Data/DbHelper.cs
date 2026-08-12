@@ -99,6 +99,7 @@ namespace Ejmmaa.Data
         public object ExecuteScalar(string storedProcedureName, SqlParameter[] parameters = null)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
+         
             using (SqlCommand cmd = new SqlCommand(storedProcedureName, conn))
             {
                 cmd.CommandType = CommandType.StoredProcedure;

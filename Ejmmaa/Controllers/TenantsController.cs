@@ -28,16 +28,23 @@ namespace Ejmmaa.Controllers
           {
                 return View(); 
           }
-          public IActionResult Edit()
+          public IActionResult Edit(int tenantId)
           {
-                return View(); 
-          }
-         public IActionResult Delete()
-          {
-                return View(); 
-          }
+               var tenantObject = new TenantsDto{TenantId = tenantId}; 
+                
+                var tenant = _tenantsService.GetTenantById(tenantObject); 
 
-          public IActionResult GetAllTenantsIsActive()
+                return View(tenant); 
+          }
+         public IActionResult Delete(int tenantId)
+          {
+               var tenantObject = new TenantsDto{TenantId = tenantId}; 
+                
+                var tenant = _tenantsService.GetTenantById(tenantObject); 
+
+                return View(tenant); 
+          }
+         public IActionResult GetAllTenantsIsActive()
           {
                 var tenantsData = new TenantsDto{
                      IsActive = 1
@@ -52,8 +59,56 @@ namespace Ejmmaa.Controllers
 
                 return Json(new{ success = true, data = tenants }); 
           }
+         public IActionResult GetTenantIsActiveById(int tenantId)
+            {
+                 var tenantsData = new TenantsDto{
+                     TenantId = tenantId,
+                     IsActive = 1
+                }; 
 
+                var tenant = _tenantsService.GetTenantById(tenantsData); 
+                 
+                 if(tenant == null)
+                 {
+                     return Json(new{ success = false, message = "لا يوجد بيانات" }); 
+                 }
 
+                return Json(new{ success = true, data = tenant }); 
+                  
+            }
+         public IActionResult SaveTenant([FromBody] TenantsDto tenantsDto)
+            {
+                        
+                  var Result = _tenantsService.AddTenant(tenantsDto); 
+
+                  if(Result)
+                  return Json(new {success = true,message = "تم الاضافة بنجاح"}); 
+                  else
+                  return Json(new{success = false ,message = "حدث خطأ اثناء الاضافة"});
+            }
+
+         public IActionResult UpdateTenant([FromBody] TenantsDto tenantsDto)
+            {
+                        
+                  var Result = _tenantsService.UpdateTenant(tenantsDto); 
+
+                  if(Result)
+                  return Json(new {success = true,message = "تم التعديل بنجاح"}); 
+                  else
+                  return Json(new{success = false ,message = "حدث خطأ اثناء التعديل"});
+            }
+
+         public IActionResult DeleteTenant([FromBody] TenantsDto tenantsDto)
+            {
+                        
+                  var Result = _tenantsService.DeleteTenant(tenantsDto); 
+
+                  if(Result)
+                  return Json(new {success = true,message = "تم الحذف بنجاح"}); 
+                  else
+                  return Json(new{success = false ,message = "حدث خطأ اثناء الحذف"});
+            }
+   
     }
 
 }       

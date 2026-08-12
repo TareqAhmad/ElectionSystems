@@ -33,23 +33,38 @@ namespace Ejmmaa.Controllers
             return View(Members); 
         }
 
-
        public IActionResult Create()
         {
             return View(); 
         }
 
-        public IActionResult Edit()
+        public IActionResult Edit(int memberId)
         {
-            return View(); 
+            int? clanId = HttpContext.Session.GetInt32("ClanId"); 
+             
+             var memberData = new MemberDto{
+                    MemberId = memberId,
+                    ClanId = clanId.Value
+             }; 
+
+             var Member = _membersService.GetMemberById(memberData);
+
+            return View(Member); 
         }
 
-        public IActionResult Delete()
+        public IActionResult Delete(int memberId)
         {
-            return View(); 
+            int? clanId = HttpContext.Session.GetInt32("ClanId"); 
+             
+             var memberData = new MemberDto{
+                    MemberId = memberId,
+                    ClanId = clanId.Value
+             }; 
+
+             var Member = _membersService.GetMemberById(memberData);
+
+            return View(Member); 
         }
-
-
 
        public IActionResult GetAllMembers()
         {
@@ -68,10 +83,25 @@ namespace Ejmmaa.Controllers
             return Json(new { success = true, data = Members });
 
         }
+       public IActionResult GetMemberById(int memberId)
+        {
+            int? clanId = HttpContext.Session.GetInt32("ClanId"); 
+             
+             var memberData = new MemberDto{
+                    MemberId = memberId,
+                    ClanId = clanId.Value
+             }; 
 
+             var Member = _membersService.GetMemberById(memberData);
 
+             if (Member == null)
+                {
+                    return Json(new { success = false, message = "لا توجد بيانات" });
+                }
 
+            return Json(new { success = true, data = Member });
 
+        }
        public IActionResult SaveMember([FromBody]MemberDto memberDto)
         {
             int? clanId = HttpContext.Session.GetInt32("ClanId"); 
@@ -86,7 +116,33 @@ namespace Ejmmaa.Controllers
             else
              return Json(new {success = false ,message = "حدث خطأ اثناء الاضافة"});  
         }
+       public IActionResult UpdateMember([FromBody]MemberDto memberDto)
+        {
+            int? clanId = HttpContext.Session.GetInt32("ClanId"); 
 
+
+            memberDto.ClanId = clanId.Value; 
+             
+            var result  = _membersService.UpdateMember(memberDto); 
+             
+             if(result)
+               return Json(new {success = true,message = "تم التحديث بنجاح"}); 
+            else
+             return Json(new {success = false ,message = "حدث خطأ اثناء التحديث"});  
+        }
+       public IActionResult DeleteMember([FromBody]MemberDto memberDto)
+        {
+            int? clanId = HttpContext.Session.GetInt32("ClanId");
+
+            memberDto.ClanId = clanId.Value;
+
+            var result = _membersService.DeleteMember(memberDto);
+
+            if (result)
+                return Json(new { success = true, message = "تم الحذف بنجاح" });
+            else
+                return Json(new { success = false, message = "حدث خطأ اثناء الحذف" });
+        }
 
     }
 

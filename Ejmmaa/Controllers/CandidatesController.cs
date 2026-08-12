@@ -37,17 +37,18 @@ namespace Ejmmaa.Controllers
 
         public IActionResult Edit(int CandidateId)
         {
-            Console.WriteLine($"CandidateId: {CandidateId}"); // Debugging line
-            var candidate = _candidatesService.GetCandidateById(CandidateId);
+            var candidatesObject = new CandidatesDto { CandidateId = CandidateId };
+
+            var candidate = _candidatesService.GetCandidateById(candidatesObject);
 
             return View(candidate); 
         }
 
         public IActionResult Delete(int CandidateId)
         {
-            Console.WriteLine($"CandidateId: {CandidateId}"); // Debugging line
-           
-           var candidate = _candidatesService.GetCandidateById(CandidateId);
+            var candidatesObject = new CandidatesDto { CandidateId = CandidateId };  
+
+            var candidate = _candidatesService.GetCandidateById(candidatesObject);
 
             return View(candidate); 
         }
