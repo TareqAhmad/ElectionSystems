@@ -19,5 +19,9 @@ namespace Ejmmaa.Services.Interfaces
 
           public bool DeleteElection(ElectionDto electionDto);
 
+          public List<ElectionsViewModel> Super_GetAllElections();
+
+  
+  
     }
 }

@@ -10,51 +10,28 @@ using Ejmmaa.Models.ViewModels;
 namespace Ejmmaa.Controllers
 {
  
-     [SessionCheckFilter]
-    public class ElectionsController : Controller
+    public class Super_ElectionsController : Controller
     {
         private readonly IElectionsService _electionsService; 
 
-        public ElectionsController(IElectionsService electionsService)
+        public Super_ElectionsController(IElectionsService electionsService)
         {
             _electionsService  = electionsService;
         }
         
-         [SessionCheckFilter]
         public IActionResult Index()
         {
-            int? clanId = HttpContext.Session.GetInt32("ClanId"); 
-
-            var electionData = new ElectionDto
-            {
-                ClanID = clanId.Value
-            }; 
-
-            var elections = _electionsService.GetAllElections(electionData); 
+            var elections = _electionsService.Super_GetAllElections(); 
             
             return View(elections); 
         }
 
-        public IActionResult Manage()
-        {
-            int? clanId = HttpContext.Session.GetInt32("ClanId"); 
-
-            var electionData = new ElectionDto
-            {
-                ClanID = clanId.Value
-            }; 
-
-            var elections = _electionsService.GetAllElections(electionData); 
-            
-            return View(elections); 
-        }
-
+    
        public IActionResult Create()
         {
             return View(); 
         }
 
-        [SessionCheckFilter]
         public IActionResult Edit(int electionId)
         {
             var electionObject = new ElectionDto { ElectionId = electionId };
@@ -64,7 +41,6 @@ namespace Ejmmaa.Controllers
             return View(election);
         }
   
-        [SessionCheckFilter]
         public IActionResult Delete(int electionId)
         {
             var electionObject = new ElectionDto { ElectionId = electionId };
@@ -74,7 +50,6 @@ namespace Ejmmaa.Controllers
             return View(election);
         }
        
-       [SessionCheckFilter]
         public IActionResult GetAllElections()
         {
             int? clanId = HttpContext.Session.GetInt32("ClanId"); 
@@ -101,7 +76,6 @@ namespace Ejmmaa.Controllers
 
         }
     
-       [SessionCheckFilter]
 
        public IActionResult GetElectionById(int electionId)
         {
@@ -117,7 +91,6 @@ namespace Ejmmaa.Controllers
             return Json(new { success = true, data = election });
         }
       
-     [SessionCheckFilter]
       public IActionResult GetMaxSelection()
         {
             int? ClanId  = HttpContext.Session.GetInt32("ClanId"); 
@@ -136,7 +109,6 @@ namespace Ejmmaa.Controllers
 
         }
      
-       [SessionCheckFilter]
        public IActionResult AddElection([FromBody]ElectionDto electionDto)
         {
             int? clanId = HttpContext.Session.GetInt32("ClanId"); 
@@ -152,7 +124,6 @@ namespace Ejmmaa.Controllers
           
         }
       
-       [SessionCheckFilter]
        public IActionResult UpdateElection([FromBody]ElectionDto electionDto)
         {
             var Result = _electionsService.UpdateElection(electionDto); 
@@ -163,8 +134,8 @@ namespace Ejmmaa.Controllers
                 return Json(new{success = false ,message = "حدث خطأ اثناء التعديل"});
         }
      
-       [SessionCheckFilter]
-       public IActionResult DeleteElection([FromBody]ElectionDto electionDto)
+  
+         public IActionResult DeleteElection([FromBody]ElectionDto electionDto)
           {
                 var Result = _electionsService.DeleteElection(electionDto); 
     

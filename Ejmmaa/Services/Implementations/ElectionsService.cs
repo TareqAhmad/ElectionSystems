@@ -61,7 +61,7 @@ namespace Ejmmaa.Services.Implementations
             
         } 
 
-       public ElectionsViewModel GetElectionById(ElectionDto electionDto)
+        public ElectionsViewModel GetElectionById(ElectionDto electionDto)
         {
             ElectionsViewModel election = null; 
 
@@ -180,6 +180,43 @@ namespace Ejmmaa.Services.Implementations
 
                 return rowsAffected > 0;
         }
+   
+   
+      // Super Admin 
+
+        public List<ElectionsViewModel> Super_GetAllElections()
+        {
+            List<ElectionsViewModel> elections = new List<ElectionsViewModel>(); 
+
+            string query  = @"SELECT ElectionId,ElectionTitle,StartDate,EndDate
+                              FROM Clan_Elections"; 
+
+             DataTable dt = _dbHelper.Select(query);       
+          
+            if (dt.Rows.Count > 0)
+            {  
+                foreach(DataRow row in dt.Rows)
+                    {
+                    var election =  new ElectionsViewModel
+                        {
+                            ElectionId  = Convert.ToInt32(row["ElectionId"]),
+                            ElectionTitle = row["ElectionTitle"].ToString(),
+                            StartDate = Convert.ToDateTime(row["StartDate"]),
+                            EndDate = Convert.ToDateTime(row["EndDate"]),
+                        };
+
+                        elections.Add(election); 
+                    }
+
+            }
+
+            return elections; 
+
+            
+        } 
+   
+   
+   
    
     }
 }

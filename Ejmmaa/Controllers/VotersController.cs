@@ -111,7 +111,7 @@ namespace Ejmmaa.Controllers
              var result = _votersService.SubmitVote(votingRegistryDto); 
 
              if(result)
-               return Json(new {success = true,message = "تم تسجيل وصوتك بنجاح وسرية تامّة!"}); 
+               return Json(new {success = true, message = "تم تسجيل وصوتك بنجاح وسرية تامّة!"}); 
             else
               return Json(new {success = false ,message = "حدث خطأ اثناء التصويت"});  
 

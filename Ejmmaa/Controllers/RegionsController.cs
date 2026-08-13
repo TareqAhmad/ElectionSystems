@@ -9,8 +9,6 @@ using Ejmmaa.Models.ViewModels;
 
 namespace Ejmmaa.Controllers
 {
-
-     [SessionCheckFilter]
     public class RegionsController : Controller
     {
            
@@ -64,8 +62,7 @@ namespace Ejmmaa.Controllers
                 // إرجاعها بنفس النمط (success و data)
                 return Json(new { success = true, data = regions });
         }
-     
-      public IActionResult GetRegionById(int RegionId)
+       public IActionResult GetRegionById(int RegionId)
         {
             var regionObject  = new RegionDto
             {

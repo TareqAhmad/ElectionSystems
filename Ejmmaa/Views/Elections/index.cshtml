@@ -12,116 +12,124 @@
 
 <div class="dashboard-wrapper-layout">
     <aside class="sidebar-wrapper">
-        <div class="sidebar-header"><h4 class="text-gold fw-bold">ادارة العملية الانتخابية</h4></div>
+        <div class="sidebar-header">
+            <h4 class="text-gold fw-bold">ادارة العملية الانتخابية</h4>
+        </div>
         <nav class="sidebar-nav">
-            <a href="@Url.Action("Manage", "Admins")" class="nav-item active"><i class="bi bi-speedometer2"></i> لوحة التحكم</a>
-            <a href="@Url.Action("Index" ,"Candidates")" class="nav-item"><i class="bi bi-gear"></i> المرشيحن</a>
-            <a href="@Url.Action("Show" , "Voters")" class="nav-item"><i class="bi bi-gear"></i> الناخبين</a>
-            <a href="@Url.Action("Manage" , "Supervisors")" class="nav-item"><i class="bi bi-gear"></i> المشرفين</a>
-            <a href="@Url.Action("Index","Regions")" class="nav-item"><i class="bi bi-people"></i>المناطق</a>
-            <a href="@Url.Action("Index","PollingStations")" class="nav-item"><i class="bi bi-people"></i>مراكز الاقتراع</a>
-            <a href="@Url.Action("Index","BallotBoxes")" class="nav-item"><i class="bi bi-diagram-3"></i>الصنديق</a>
-           <div class="nav-divider"></div>
-           <a href="" class="nav-item text-danger"><i class="bi bi-box-arrow-right"></i>عودة</a>
-        </nav>
-    </aside>
+            <a href="@Url.Action("Manage", "Admins")" class="nav-item active"><i class="bi bi-speedometer2"></i> لوحة
+                التحكم</a>
+                <a href="@Url.Action("Index" ,"Candidates")" class="nav-item"><i class="bi bi-gear"></i> المرشيحن</a>
+                <a href="@Url.Action("Show" , "Voters")" class="nav-item"><i class="bi bi-gear"></i> الناخبين</a>
+                <a href="@Url.Action("Manage" , "Supervisors")" class="nav-item"><i class="bi bi-gear"></i> المشرفين</a>
+                <a href="@Url.Action("Index","PollingStations")" class="nav-item"><i class="bi bi-people"></i>مراكز
+                    الاقتراع</a>
+                    <a href="@Url.Action("Index","BallotBoxes")" class="nav-item"><i class="bi bi-diagram-3"></i>الصنديق</a>
+                    <div class="nav-divider"></div>
+                    <a href="" class="nav-item text-danger"><i class="bi bi-box-arrow-right"></i>عودة</a>
+                </nav>
+            </aside>
 
-    <main class="main-content-dashboard">
-        <header class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="fw-bold">لوحة ادارة العملية الانتخابية</h2>
-            <a href="@Url.Action("Create", "Elections")" class="btn btn-gold">
-                <i class="bi bi-plus-lg"></i> اضافـــة
-            </a>
-        </header>
+            <main class="main-content-dashboard">
+                <header class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="fw-bold">لوحة ادارة العملية الانتخابية</h2>
+                    <a href="@Url.Action("Create", "Elections")" class="btn btn-gold">
+                        <i class="bi bi-plus-lg"></i> اضافـــة
+                    </a>
+                </header>
 
-        <div class="row g-4">
-            <div class="col-12">
-                <div class="card p-3 shadow-sm">
-                    <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-info-circle"></i> معلومات العملية الانتخابية</h5>
-                    <table id="ClanInfoTable" class="table ejmaa-table w-100">
-                        <thead class="table-light">
-                            <tr>
-                                <th>رمز العملية</th>
-                                <th>عنوان العملية</th>
-                                <th>تاريخ البدء</th>
-                                <th>تاريخ النهاية</th>
-                                <th>الإجراءات</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach(var election in Model)
-                            {
-                                <tr>
-                                    <td>@election.ElectionId</td>
-                                    <td>@election.ElectionTitle</td>
-                                    <td>@election.StartDate</td>
-                                    <td>@election.EndDate</td>
-                                    <td>
-                                        <a class="btn btn-sm btn-warning" id="editBtn">تعديل</a>
-                                        <a class="btn btn-sm btn-danger" id="deleteBtn">حذف</a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="card p-3 shadow-sm">
+                            <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-info-circle"></i> معلومات العملية الانتخابية
+                            </h5>
+                            <table id="ClanInfoTable" class="table ejmaa-table w-100">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>رمز العملية</th>
+                                        <th>عنوان العملية</th>
+                                        <th>تاريخ البدء</th>
+                                        <th>تاريخ النهاية</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var election in Model)
+                                    {
+                                        <tr>
+                                            <td>@election.ElectionId</td>
+                                            <td>@election.ElectionTitle</td>
+                                            <td>@election.StartDate</td>
+                                            <td>@election.EndDate</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-warning" id="editBtn">تعديل</a>
+                                                <a class="btn btn-sm btn-danger" id="deleteBtn">حذف</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="card p-3 shadow-sm">
+                            <h5 class="fw-bold mb-3"><i class="bi bi-diagram-3"></i>المرشحين</h5>
+                            <table id="SectionsTable" class="table ejmaa-table w-100">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>CheckBox</th>
+                                        <th>القسم</th>
+                                        <th>عدد الأفراد</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ClanSectionsBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </main>
+        </div>
 
-            <div class="col-12">
-                <div class="card p-3 shadow-sm">
-                    <h5 class="fw-bold mb-3"><i class="bi bi-diagram-3"></i>المرشحين</h5>
-                    <table id="SectionsTable" class="table ejmaa-table w-100">
-                        <thead class="table-light">
-                            <tr>
-                                <th>CheckBox</th>
-                                <th>القسم</th>
-                                <th>عدد الأفراد</th>
-                                <th>الإجراءات</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ClanSectionsBody">
-                        </tbody>
-                    </table>
+        @section Scripts {
+            <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+            <script src="~/JS/apiService.js"></script>
+            <script src="~/JS/Elections/Index.js"></script>
+        }
+
+
+
+        <div class="modal fade" id="AddOptionsModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-custom text-white d-flex justify-content-between align-items-center w-100"
+                         dir="rtl">
+                        <h5 class="modal-title m-0">خيارات الاضافة</h5>
+                        <button type="button" class="btn-close btn-close-white m-0" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <div class="row g-3">
+                            <!-- خيار إنهاء الشفت -->
+                            <div class="col-6">
+                                <a id="btnAddSection" href="@Url.Action("Create","Sections")"
+                                   class="btn btn-outline-success w-100 p-3 fs-5 fw-bold">
+                                    <i class="bi bi-clock-history d-block mb-2"></i>
+                                    اضافة اقسام للعشيرة
+                                </a>
+                            </div>
+                            <!-- خيار المغادرة -->
+                            <div class="col-6">
+                                <a id="btnAddMember" href="@Url.Action("Create","Members")"
+                                   class="btn btn-outline-primary w-100 p-3 fs-5 fw-bold">
+                                    <i class="bi bi-door-open d-block mb-2"></i>
+                                    اضافة افراد للعشيرة
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </main>
-</div>
-
-@section Scripts {
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-    <script src="~/JS/apiService.js"></script>
-    <script src="~/JS/Elections/Index.js"></script>
-}
-
-
-
-<div class="modal fade" id="AddOptionsModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-custom text-white d-flex justify-content-between align-items-center w-100" dir="rtl">
-                <h5 class="modal-title m-0">خيارات الاضافة</h5>
-                <button type="button" class="btn-close btn-close-white m-0" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-4">
-                <div class="row g-3">
-                    <!-- خيار إنهاء الشفت -->
-                    <div class="col-6">
-                        <a id="btnAddSection" href="@Url.Action("Create","Sections")" class="btn btn-outline-success w-100 p-3 fs-5 fw-bold">
-                            <i class="bi bi-clock-history d-block mb-2"></i>
-                                 اضافة اقسام للعشيرة 
-                         </a>
-                    </div>
-                    <!-- خيار المغادرة -->
-                    <div class="col-6">
-                        <a id="btnAddMember" href="@Url.Action("Create","Members")" class="btn btn-outline-primary w-100 p-3 fs-5 fw-bold">
-                            <i class="bi bi-door-open d-block mb-2"></i>
-                               اضافة افراد للعشيرة
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

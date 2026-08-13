@@ -215,6 +215,7 @@ C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10
 C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\compressed\4zx61glgib-{0}-gb2qtv66qm-gb2qtv66qm.gz
 C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\compressed\ronod628g3-{0}-n6miav3n4c-n6miav3n4c.gz
 C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\compressed\5gc9vfh3hf-{0}-blx9f99y73-blx9f99y73.gz
+C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\compressed\r30w7cdhea-{0}-e8ya6nwtu7-e8ya6nwtu7.gz
 C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\compressed\2ffqwn899a-{0}-howzlpg7jj-howzlpg7jj.gz
 C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\compressed\bj1zylno9u-{0}-5ipweew5fc-5ipweew5fc.gz
 C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\compressed\ll4efnxycl-{0}-5ipweew5fc-5ipweew5fc.gz
@@ -254,6 +255,7 @@ C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10
 C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\compressed\nmz9w3apvg-{0}-2tky2c6dh4-2tky2c6dh4.gz
 C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\compressed\oc9eliagta-{0}-uilzogf3hq-uilzogf3hq.gz
 C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\compressed\u673f7a051-{0}-138infu4m4-138infu4m4.gz
+C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\compressed\4d1ej09iqr-{0}-yp75ic9m9n-yp75ic9m9n.gz
 C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\compressed\4had8ctyaf-{0}-y34rig5yyh-y34rig5yyh.gz
 C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\staticwebassets.build.json
 C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\staticwebassets.build.json.cache
@@ -266,5 +268,3 @@ C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10
 C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\Ejmmaa.pdb
 C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\Ejmmaa.genruntimeconfig.cache
 C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\ref\Ejmmaa.dll
-C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\compressed\r30w7cdhea-{0}-e8ya6nwtu7-e8ya6nwtu7.gz
-C:\Users\HP\OneDrive\Desktop\TASS_Systems\ElectionSystems\Ejmmaa\obj\Debug\net10.0\compressed\4d1ej09iqr-{0}-osbofd99cv-osbofd99cv.gz
